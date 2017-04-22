@@ -111,9 +111,9 @@ export default class ExtraServices extends Component {
             </div>
           )}
         </Slider>
-        <Link to="/order/extraservices">
+        <Link to="/order/checkout">
           <Button
-            title="Choose for me"
+            title="Skip"
             style={{
             width: 250,
             left: "50%",
