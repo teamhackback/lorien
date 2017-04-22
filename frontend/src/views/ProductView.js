@@ -4,7 +4,7 @@ import menuTitleStore from '../MenuTitleStore';
 import { Link } from 'react-router-dom';
 
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
-import PageTransition from 'react-router-page-transition';
+//import PageTransition from 'react-router-page-transition';
 
 class ResponsiveTile extends Component {
   openTile = () => {
