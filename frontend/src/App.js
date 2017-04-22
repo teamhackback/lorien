@@ -17,6 +17,7 @@ import ProductList from './views/ProductList';
 import ProductView from './views/ProductView';
 import LocationPicker from './views/LocationPicker';
 import ExtraServices from './views/ExtraServices';
+import Checkout from './views/Checkout';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
