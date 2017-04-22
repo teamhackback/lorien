@@ -31,7 +31,7 @@ class App extends Component {
             <Route path="/order/products" component={ProductView} />
             <Route path="/order/location" component={LocationPicker} />
             <Route path="/order/extraservices" component={ExtraServices} />
-            <Route path="/checkout" component={Checkout} />
+            <Route path="/order/checkout" component={Checkout} />
           </div>
         </Router>
       </div>
