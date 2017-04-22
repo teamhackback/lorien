@@ -22,6 +22,18 @@ class ResponsiveTile extends Component {
     this.setState({
       isSelected: true,
       doTransform: true,
+      animation: {
+        img: {
+          duration: 500,
+          style: {
+            maxWidth: 1000,
+            maxHeight: 1000,
+            width: window.innerWidth * 0.8,
+            height: window.innerWidth * 0.8,
+            marginTop: "20%"
+          }
+        }
+      }
     });
 
     setTimeout(() => {
@@ -42,14 +54,38 @@ class ResponsiveTile extends Component {
         left: 0,
         width: window.innerWidth,
       },
+		animation: {
+			img: {
+				duration: 600,
+				style: {height: null}
+			},
+    }
   };
+
+  componentDidMount() {
+    this.elements.img.style.width = "18px";
+    this.elements.img.style.height = "18px";
+    setTimeout(() => {
+      this.setState({
+        animation: {
+          img: {
+            duration: 800,
+            style: {
+              width: 88,
+              height: 88,
+            }
+          }
+        }
+      });
+    }, 400);
+  }
 
   render() {
     const name = this.props.data.name.toLowerCase();
     const icon = `/img/trees/${name}.svg`;
     const background = `/img/trees-bg/${name}.jpg`;
     return (
-    <VelocityTransitionGroup enter={{animation: "transition.flipXIn", duration: 1000}} leave={{animation: "slideUp"}} runOnMount={true}>
+    <VelocityTransitionGroup enter={{animation: "transition.flipXIn", duration: 1300}} leave={{animation: "slideUp"}} runOnMount={true}>
       <VelocityComponent animation={{
         transform: this.state.doTransform ?
          `translate3d(0, ${this.state.position.top}px, 0)` :
@@ -77,18 +113,24 @@ class ResponsiveTile extends Component {
         backgroundSize: "cover",
       }}
         onClick={this.openTile}>
-        <VelocityComponent animation={{
-          maxWidth: this.state.isSelected ? 1000 : 88,
-          maxHeight: this.state.isSelected ? 1000 : 88,
-          width: this.state.isSelected ? window.innerWidth * 0.8 : 88,
-          height: this.state.isSelected ? window.innerWidth * 0.8 : 88,
-          marginTop: "20%"
-        }} duration={500}>
-          <img className="tile-product-icon" style={{
-            marginTop: 33,
-          }}
-          src={icon}  alt="dummy" />
-        </VelocityComponent>
+
+
+          <div style={{
+                height: Math.max(88, this.state.animation.img.style.height),
+                paddingTop: 33,
+  			        display: "flex",
+    		        alignItems: "center",
+    		        justifyContent: "center"
+          }}>
+            <VelocityComponent animation={{
+              ...this.state.animation.img.style
+            }} duration={this.state.animation.img.duration}>
+              <img ref={el => this.elements.img = el} className="tile-product-icon" style={{
+              }}
+              src={icon}  alt="dummy" />
+            </VelocityComponent>
+          </div>
+
         <div style={{
           fontSize: 14,
           marginTop: 20,
