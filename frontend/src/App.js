@@ -63,6 +63,7 @@ class App extends Component {
                 </RouteTransition>
                 )}
             </Route>
+            <Route path="/order/checkout" component={Checkout} />
 
           </div>
         </Router>
