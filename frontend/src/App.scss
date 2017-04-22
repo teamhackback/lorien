@@ -59,3 +59,24 @@ html a {
 	}
 }
 
+.tile-product-item {
+ //transition:all 0.2s ease-in;
+}
+
+//.tile-product-item:hover {
+	//opacity: 0.7;
+	//.tile-product-icon {
+		//max-height: 100px;
+		//max-height: 100px;
+	//}
+//}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}

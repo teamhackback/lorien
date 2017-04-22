@@ -28,7 +28,7 @@ function ProgressBar(props) {
 export default observer(function(props) {
   return (
     <div style={{
-      height: 45,
+      height: 46,
       borderBottom: "solid 1px #979797",
       justifyContent: "space-between",
       display: "flex",
