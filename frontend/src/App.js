@@ -38,9 +38,8 @@ class App extends Component {
               transitionEnterTimeout={3000}
               transitionLeaveTimeout={300}
             >
-              <Route exact path="/" component={MainView} />
+              <Route path="/" component={ProductList} />
              </ReactCSSTransitionGroup>
-              <Route path="/order/list" component={ProductList} />
               <Route path="/order/products" component={ProductView} />
             <Route path="/order/location">
                {({ match }) => (
