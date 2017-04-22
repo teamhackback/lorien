@@ -11,7 +11,7 @@ function ResponsiveTile(props) {
         width: "100%",
         padding: 0,
         textAlign: "center",
-        height: 200,
+        height: props.height,
         backgroundColor: "#d8d8d8",
         ...props.data.style
       }}>
@@ -76,13 +76,14 @@ export default class ProductView extends Component {
     menuTitleStore.progressSelected = 1;
   }
   render() {
+    const height = window.innerWidth / 2;
     return (
       <div>
       <Grid fluid style={{padding: 0, marginLeft: 0, marginRight: 0}}>
         <Row style={{padding: 0, marginLeft: 0, marginRight: 0}}>
         { tilesData.map((tile) =>
           <Col xs={6} md={3} key={tile.id} style={{padding: 0}}>
-            <ResponsiveTile data={tile} />
+            <ResponsiveTile data={tile} height={height} />
           </Col>
         )}
         </Row>
