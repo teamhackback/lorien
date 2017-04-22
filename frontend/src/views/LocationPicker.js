@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import menuTitleStore from '../MenuTitleStore';
 import Dimensions from 'react-dimensions'
 import { Link } from 'react-router-dom';
+import Button from '../components/Button';
 
 import {
   withGoogleMap,
@@ -123,30 +124,18 @@ export default Dimensions()(class LocationPicker extends Component {
             markers={this.state.markers}
           />
         </div>
-        <Link to="/">
-          <div style={{
+        <Link to="/order/extraservices">
+          <Button
+            title="Choose for me"
+            style={{
             marginTop: -80,
             position: "fixed",
             zIndex: 10,
             width: 250,
-            height: 45,
-            borderRadius: 100,
-            backgroundColor: "#ebebeb",
-            border: "solid 1px #979797",
             transform: "translate(-50%, 0%)",
             left: "50%"
           }}>
-          <div style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: 14,
-            color: "black"
-          }}>
-              Choose for me
-            </div>
-          </div>
+          </Button>
         </Link>
       </div>
     )
