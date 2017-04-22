@@ -3,12 +3,12 @@ import menuTitleStore from '../MenuTitleStore';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import Tappable from 'react-tappable';
 
 function CarouselItem(props) {
   return (
     <div className="carousel-item" style={{
       borderRadius: 3,
-      backgroundColor: "#d8d8d8",
       boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
       border: "solid 1px #979797"
     }}>
@@ -18,7 +18,7 @@ function CarouselItem(props) {
     }}/>
       <div style={{
         borderRadius: 3,
-        backgroundColor: "#d8d8d8",
+        backgroundColor: props.selected ? "red" : "#d8d8d8",
         boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
         border: "solid 1px #979797",
         color: "black",
@@ -53,32 +53,40 @@ function CarouselItem(props) {
   )
 }
 
-const extraServices = [
-{
-  img: "/dummy/carousel.jpg",
-  title: "The drone gardener",
-  subtitle: "Makes your mother happy",
-  cost: "+200$ / month"
-},
-{
-  img: "/dummy/carousel.jpg",
-  title: "The drone gardener",
-  subtitle: "Makes your mother happy",
-  cost: "+200$ / month"
-},
-{
-  img: "/dummy/carousel.jpg",
-  title: "The drone gardener",
-  subtitle: "Makes your mother happy",
-  cost: "+200$ / month"
-}
-];
-
 export default class ExtraServices extends Component {
   componentWillMount() {
     menuTitleStore.title = "Extra services";
     menuTitleStore.progressSelected = 2;
+    this.state = {
+      items: [
+        {
+          img: "/dummy/carousel.jpg",
+          title: "The drone gardener",
+          subtitle: "Makes your mother happy",
+          cost: "+200$ / month"
+        },
+        {
+          img: "/dummy/carousel.jpg",
+          title: "The drone gardener",
+          subtitle: "Makes your mother happy",
+          cost: "+200$ / month"
+        },
+        {
+          img: "/dummy/carousel.jpg",
+          title: "The drone gardener",
+          subtitle: "Makes your mother happy",
+          cost: "+200$ / month"
+        }
+      ]
+    };
   }
+  onTap(item, i) {
+    const items = this.state.items;
+    items[i].selected = !items[i].selected;
+    this.setState({items});
+    console.log("select", i);
+  }
+
   render() {
     const settings = {
       dots: true,
@@ -95,8 +103,12 @@ export default class ExtraServices extends Component {
     return (
       <div>
         <Slider {...settings}>
-          {extraServices.map((item, i) =>
-            <div key={i}><CarouselItem {...item} /></div>
+          {this.state.items.map((item, i) =>
+            <div key={i}>
+              <Tappable onTap={() => this.onTap(item, i)}>
+                <CarouselItem {...item} />
+              </Tappable>
+            </div>
           )}
         </Slider>
         <Link to="/order/extraservices">

@@ -18,7 +18,8 @@
     "react-router-dom": "^4.1.1",
     "react-slick": "^0.14.11",
     "react-stonecutter": "^0.3.4",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "react-tappable": "^0.8.4"
   },
   "devDependencies": {
     "custom-react-scripts": "0.0.23"
