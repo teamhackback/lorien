@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
+import beehive from '../public/img/beehive.svg';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -18,6 +20,8 @@ import ProductView from './views/ProductView';
 import LocationPicker from './views/LocationPicker';
 import ExtraServices from './views/ExtraServices';
 import Checkout from './views/Checkout';
+import Carbon from './views/Carbon';
+import Apiary from './views/Apiary';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -64,7 +68,8 @@ class App extends Component {
                 )}
             </Route>
             <Route path="/order/checkout" component={Checkout} />
-
+            <Route path="/products/carbon" component={Carbon} />
+            <Route path="/products/apiary" component={Apiary} />
           </div>
         </Router>
       </div>
