@@ -5,8 +5,8 @@ export default function(props) {
     <div style={{
       height: 45,
       borderRadius: 100,
-      backgroundColor: "#ebebeb",
-      border: "solid 1px #979797",
+      backgroundImage: "linear-gradient(101deg, #bed625, #74be60)",
+      boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
       ...props.style
     }}>
       <div style={{
@@ -14,8 +14,10 @@ export default function(props) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        fontSize: 14,
-        color: "black",
+        fontSize: 17,
+        fontWeight: 600,
+        lineHeight: 2.35,
+        color: "white",
         display: "inline-block"
       }}>
         { props.title }
