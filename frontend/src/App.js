@@ -15,8 +15,9 @@ import AppBar from './AppBar';
 import MainView from './views/MainView';
 import ProductList from './views/ProductList';
 import ProductView from './views/ProductView';
-import LocationPicker from './views/LocationPicker';
 import ExtraServices from './views/ExtraServices';
+import LocationPicker from './views/LocationPicker';
+import Checkout from './views/Checkout';
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
             <Route path="/order/products" component={ProductView} />
             <Route path="/order/location" component={LocationPicker} />
             <Route path="/order/extraservices" component={ExtraServices} />
+            <Route path="/checkout" component={Checkout} />
           </div>
         </Router>
       </div>
