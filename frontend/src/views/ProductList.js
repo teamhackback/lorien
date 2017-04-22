@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { CardStack, Card } from 'react-cardstack';
-
+import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
 
@@ -17,65 +17,38 @@ export default class ProductList extends Component {
         background='#f8f8f8'
         hoverOffset={25}>
 
-        <Card background='#d8d8d8'>
-        <div style={{
-          width: "100%",
-          padding: 0,
-          textAlign: "center"
-        }}>
-          <h1>Plant your personal tree</h1>
+        <Card background='#74be60'>
+        <Link to="/products">
+
+          <h1>Plant your personal tree</h1>      </Link>
           <img src="/dummy/tree.png" alt="dummy" />
-          <p>It will have your name on it, and it will stay for 50 years</p>
-        </div>
+          <p>Plant a tree in someone's name - a unique and green gift for events such as birthdays, holidays, graduations, weddings, new births, anniversaries, or any special occasion. Now you can pay tribute to your friends and loved ones while replanting our nation's forests.</p>
         </Card>
 
-        <Card background='#d8d8d8'>
-        <div style={{
-          width: "100%",
-          padding: 0,
-          textAlign: "center"
-        }}>
-          <h1>Establish a beehive</h1>
+        <Card background='#9fc74f'>
+        <Link to="/products">
+          <h1>Establish a beehive</h1></Link>
           <img src="/dummy/tree.png" alt="dummy" />
           <p>After 3 months your personal honey will arrive at your door</p>
-        </div>
         </Card>
 
+        <Card background='#d9d01b'>
+        <Link to="/location">
+          <h1>Reduce your CO2 footprint</h1></Link>
+          <img src="/dummy/tree.png" alt="dummy" />
+          <p>Sponsor a tree to protect it from chopping</p>
+        </Card>
+
+
+
         <Card background='#d8d8d8'>
-        <div style={{
-          width: "100%",
-          padding: 0,
-          textAlign: "center"
-        }}>
           <h1>Reduce your CO2 footprint</h1>
           <img src="/dummy/tree.png" alt="dummy" />
           <p>Sponsor a tree to protect it from chopping</p>
-        </div>
+
         </Card>
 
-        <Card background='#d8d8d8'>
-        <div style={{
-          width: "100%",
-          padding: 0,
-          textAlign: "center"
-        }}>
-          <h1>Reduce your CO2 footprint</h1>
-          <img src="/dummy/tree.png" alt="dummy" />
-          <p>Sponsor a tree to protect it from chopping</p>
-        </div>
-        </Card>
 
-        <Card background='#d8d8d8'>
-        <div style={{
-          width: "100%",
-          padding: 0,
-          textAlign: "center"
-        }}>
-          <h1>Reduce your CO2 footprint</h1>
-          <img src="/dummy/tree.png" alt="dummy" />
-          <p>Sponsor a tree to protect it from chopping</p>
-        </div>
-        </Card>
 
       </CardStack>
     )
