@@ -34,7 +34,7 @@ class Card extends Component {
 	}
 	render() {
   	return (
-  	  <Link to="/order/products">
+  	  <Link to={this.props.data.link}>
   	    <div style={{
   	      height: 144,
 					...this.props.data.style
@@ -96,7 +96,8 @@ const menuItems = [
   img: "/img/menu-icons/tree.svg",
   style: {
     backgroundColor: "#74be60"
-  }
+  },
+  link : "/order/products"
 },
 {
   id: 2,
@@ -105,7 +106,8 @@ const menuItems = [
   img: "/img/menu-icons/beehive.svg",
   style: {
     backgroundColor: "#9fc74f"
-  }
+  },
+  link : "/products/apiary"
 },
 {
   id: 3,
@@ -114,7 +116,8 @@ const menuItems = [
   img: "/img/menu-icons/berry.svg",
   style: {
     backgroundColor: "#bfd625"
-  }
+  },
+  link : "/products/carbon"
 }
 ];
 

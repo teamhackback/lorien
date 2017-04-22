@@ -42,7 +42,7 @@ class App extends Component {
               transitionEnterTimeout={3000}
               transitionLeaveTimeout={300}
             >
-              <Route path="/" component={ProductList} />
+              <Route exact path="/" component={ProductList} />
              </ReactCSSTransitionGroup>
               <Route path="/order/products" component={ProductView} />
             <Route path="/order/location">
@@ -67,8 +67,18 @@ class App extends Component {
                 </RouteTransition>
                 )}
             </Route>
+            <Route path="/products/carbon">
+               {({ match }) => (
+                <RouteTransition
+                        atEnter={{ opacity: 0 }}
+                        atLeave={{ opacity: 0 }}
+                        atActive={{ opacity: 1 }}
+                        pathname={location.pathname}>
+                    {match && <Carbon />}
+                </RouteTransition>
+                )}
+            </Route>
             <Route path="/order/checkout" component={Checkout} />
-            <Route path="/products/carbon" component={Carbon} />
             <Route path="/products/apiary" component={Apiary} />
           </div>
         </Router>

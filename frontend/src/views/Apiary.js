@@ -53,7 +53,7 @@ const beehiveChargesPerSize = [
   },
 ];
 
-export default class Carbon extends Component {
+export default class Apiary extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,20 +79,20 @@ export default class Carbon extends Component {
           <div style={{width: 100 + '%', textAlign: 'center'}}>
             <img style={{margin: "auto", padding: "40px 0", width: "65%"}} src={'/img/beehive.svg'} />
           </div>
-          <div>
+          <div style={{padding: "0 20px"}}>
             <CustomSlider min={1} max={3} step={1} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
           </div>
           <div style={valueWrapper}>
-            <div>Small</div>
-            <div style={currentValue}>Medium</div>
-            <div>Large</div>
+            <div className={this.state.sliderValue == 1 ? 'current' : ''}>Small</div>
+            <div className={this.state.sliderValue == 2 ? 'current' : ''}>Medium</div>
+            <div className={this.state.sliderValue == 3 ? 'current' : ''}>Large</div>
           </div>
           <div style={totalPriceWrapper}>
             <p style={{ borderTop: "1px solid #979797", borderBottom: "1px solid #979797", padding: "10px 0"}}>
               {beehiveChargesPerSize[this.state.sliderValue - 1]['quantity'] + "L of honey for $" + beehiveChargesPerSize[this.state.sliderValue - 1]['amount'] + "/month"}
             </p>
           </div>
-          <Button title="Confirm" style={{width: 90 + '%', margin: 'auto'}}/>
+          <Button title="Confirm" style={{margin: 'auto'}}/>
         </div>
 
       </div>
