@@ -11,8 +11,9 @@ import './App.scss';
 import './App.styl';
 import styles from './Modules.css';
 
-import AppBar from './views/AppBar';
+import AppBar from './AppBar';
 import MainView from './views/MainView';
+import ProductView from './views/ProductView';
 
 class App extends Component {
   render() {
@@ -20,7 +21,10 @@ class App extends Component {
       <div className="App">
         <AppBar />
         <Router>
-          <Route path="/" component={MainView} />
+          <div>
+            <Route exact path="/" component={MainView} />
+            <Route path="/products" component={ProductView} />
+          </div>
         </Router>
       </div>
     )

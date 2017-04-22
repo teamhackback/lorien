@@ -4,9 +4,13 @@
   "private": true,
   "dependencies": {
     "material-ui": "^0.17.4",
+    "pui-react-grids": "^8.0.5",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-flexbox-grid": "^1.0.2",
+    "react-grid-layout": "^0.14.6",
     "react-router-dom": "^4.1.1",
+    "react-stonecutter": "^0.3.4",
     "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
