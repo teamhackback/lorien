@@ -13,6 +13,7 @@ import styles from './Modules.css';
 
 import AppBar from './AppBar';
 import MainView from './views/MainView';
+import ProductList from './views/ProductList';
 import ProductView from './views/ProductView';
 import LocationPicker from './views/LocationPicker';
 import ExtraServices from './views/ExtraServices';
@@ -25,6 +26,7 @@ class App extends Component {
           <div>
             <AppBar />
             <Route exact path="/" component={MainView} />
+            <Route path="/order/list" component={ProductList} />
             <Route path="/order/products" component={ProductView} />
             <Route path="/order/location" component={LocationPicker} />
             <Route path="/order/extraservices" component={ExtraServices} />

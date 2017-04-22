@@ -4723,6 +4723,10 @@ react-addons-transition-group@^15.4.0, react-addons-transition-group@^15.4.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
+react-cardstack@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-cardstack/-/react-cardstack-0.1.1.tgz#18e216227bda62cd64061a6c7f0513d05891c411"
+
 react-dev-utils@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-0.4.2.tgz#ba6fae581fe945a2fc402e9b27c71fda4f62f6a1"
