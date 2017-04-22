@@ -11,12 +11,17 @@ function Card(props) {
         height: 144,
 				...props.data.style
       }}>
-      <img style={{
+      <div style={{
         float: "right",
         marginTop: 43,
-        marginRight: 37
-      }}
-      src="/dummy/co2.png" alt="dummy" />
+				width: 82,
+				paddingRight: 20
+      }}>
+			<img style={{
+				display: "block",
+				margin: "0 auto",
+			}} src={props.data.img} alt="dummy" />
+			</div>
 
         <div style={{
           paddingLeft: 23,
@@ -49,7 +54,7 @@ const menuItems = [
   id: 1,
   title: "Plant your personal tree",
   subtitle: "It will have your name on it, and will stay safe for 50 years",
-  img: "/img/menu-icons/berry.svg",
+  img: "/img/menu-icons/tree.svg",
   style: {
     backgroundColor: "#74be60"
   }
@@ -67,7 +72,7 @@ const menuItems = [
   id: 3,
   title: "Reduce your CO2 footprint",
   subtitle: "Sponsor a tree to protect it from chopping",
-  img: "/img/menu-icons/tree.svg",
+  img: "/img/menu-icons/berry.svg",
   style: {
     backgroundColor: "#bfd625"
   }
