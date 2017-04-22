@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import menuTitleStore from '../MenuTitleStore';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+
 
 const styleTitle = {
     fontFamily: "Montserrat",
