@@ -36,7 +36,7 @@ const Map = withGoogleMap(props => (
     onBoundsChanged={props.onBoundsChanged}
     panControl={false}
     defaultOptions={{
-      fullScreenControl: false,
+      fullscreenControl: false,
       streetViewControl: false,
       zoomControl: false,
       mapTypeControl: false,
