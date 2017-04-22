@@ -10,8 +10,10 @@ class Card extends Component {
 	state = {
 		animation: {
 			img: {
-				duration: 200,
-				style: {}
+				duration: 2000,
+				style: {
+					height: null
+				}
 			},
 		}
 	}
@@ -45,18 +47,19 @@ class Card extends Component {
 					width: 82,
 					paddingRight: 20,
   				display: "flex",
-    			alignItems: "center"
+    			alignItems: "center",
+					height: 74
   	    }}>
-
-
- 			<VelocityComponent animation={{
-				...this.state.animation.img.style
-			 }} duration={this.state.animation.img.duration}>
+ 				<VelocityComponent animation={{
+					...this.state.animation.img.style,
+				 }} duration={this.state.animation.img.duration} easing="spring">
 				<img
 					ref={el => this.elements.img = el}
 					style={{
 					display: "block",
 					margin: "0 auto",
+					width: 5,
+					height: 5
 				}} src={this.props.data.img} alt="dummy" />
 				</VelocityComponent>
 				</div>
@@ -123,12 +126,12 @@ export default class ProductList extends Component {
 	state = {
 		animation: {
 			img: {
-				duration: 200,
-				style: {}
+				duration: 600,
+				style: {height: null}
 			},
 			list: {
-				duration: 600,
-				style: {}
+				duration: 1000,
+				style: {height: null}
 			}
 		}
 	}
@@ -167,6 +170,7 @@ export default class ProductList extends Component {
   render() {
     const height = window.innerHeight;
     const width = "100%";
+console.log(this.state.animation.img.style);
     return (
 
 		<div>
