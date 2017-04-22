@@ -69,6 +69,7 @@ const tilesData = [
 export default class ProductView extends Component {
   componentWillMount() {
     menuTitleStore.title = "Pick your tree";
+    menuTitleStore.progressSelected = 1;
   }
   render() {
     return (

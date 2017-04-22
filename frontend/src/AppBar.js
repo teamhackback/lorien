@@ -3,6 +3,28 @@ import React, {Component} from 'react';
 import menuTitleStore from './MenuTitleStore';
 import {observer} from 'mobx-react';
 
+function ProgressBar(props) {
+  const radius = props.radius || 5;
+  const maxElements = props.maxElements || 5;
+  const selectedElement = props.selected || 0;
+  return (
+    <div>
+        <svg height="10" width="60">
+          {[...Array(maxElements)].map((x, i) =>
+            <circle
+              key={i}
+              cx={radius + 2.2 * i * radius}
+              cy={radius}
+              r={radius}
+              fill="#939191"
+              opacity={selectedElement === i ? 1 : 0.3}
+            />
+          )}
+        </svg>
+    </div>
+  )
+}
+
 export default observer(function(props) {
   return (
     <div style={{
@@ -23,7 +45,7 @@ export default observer(function(props) {
       </div>
       <div style={{
       }}>
-        Progress
+        <ProgressBar selected={menuTitleStore.progressSelected} />
       </div>
     </div>
   )
