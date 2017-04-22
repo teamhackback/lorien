@@ -14,16 +14,18 @@ import styles from './Modules.css';
 import AppBar from './AppBar';
 import MainView from './views/MainView';
 import ProductView from './views/ProductView';
+import LocationPicker from './views/LocationPicker';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppBar />
         <Router>
           <div>
+            <AppBar />
             <Route exact path="/" component={MainView} />
             <Route path="/products" component={ProductView} />
+            <Route path="/location" component={LocationPicker} />
           </div>
         </Router>
       </div>

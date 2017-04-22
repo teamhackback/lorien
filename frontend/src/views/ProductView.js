@@ -1,29 +1,33 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import menuTitleStore from '../MenuTitleStore';
+import { Link } from 'react-router-dom';
 
 
 function ResponsiveTile(props) {
   return (
-    <div style={{
-      width: "100%",
-      padding: 0,
-      textAlign: "center",
-      height: 200,
-      backgroundColor: "#d8d8d8",
-      ...props.data.style
-    }}>
-      <img style={{
-        marginTop: 50,
-      }}
-      src="/dummy/tree.png" alt="dummy" />
+    <Link to="/location">
       <div style={{
-        fontSize: 20,
-        marginTop: 20,
+        width: "100%",
+        padding: 0,
+        textAlign: "center",
+        height: 200,
+        backgroundColor: "#d8d8d8",
+        ...props.data.style
       }}>
-        Honey
+        <img style={{
+          marginTop: 50,
+        }}
+        src="/dummy/tree.png" alt="dummy" />
+        <div style={{
+          fontSize: 20,
+          marginTop: 20,
+          color: "black",
+        }}>
+          Honey
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
