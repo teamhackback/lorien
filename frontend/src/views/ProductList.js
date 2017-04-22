@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
 import { CardStack, Card } from 'react-cardstack';
 import { Link } from 'react-router-dom';
+import menuTitleStore from '../MenuTitleStore';
+
 
 export default class ProductList extends Component {
+  componentWillMount() {
+    menuTitleStore.title = "Pick your product";
+    menuTitleStore.progressSelected = 1;
+  }
 
   handleCardClick(isCardSelected) {
 	console.log(isCardSelected);
 }
 
   render() {
+    const height = window.innerHeight;
+    const width = "100%";
     return (
 
       <CardStack
-        height={500}
-        width={400}
+        height={height}
+        width={width}
         background='#f8f8f8'
         hoverOffset={25}>
 
