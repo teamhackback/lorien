@@ -36,3 +36,26 @@ html body {
 html a {
 	text-decoration: none;
 }
+
+.carousel {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	overflow: hidden;
+
+	.slick-center .carousel-item {
+	    color: #e67e22;
+	    opacity: 1;
+	    transform: scale(1);
+	}
+
+	.carousel-item {
+	    opacity: 0.8;
+	    transform: scale(0.9);
+	}
+
+	.slick-slide {
+		//padding-right: 10px;
+		//padding-left: 10px;
+	}
+}
+

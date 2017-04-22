@@ -10,12 +10,13 @@ export default function(props) {
       ...props.style
     }}>
       <div style={{
-        position: "fixed",
+        position: "relative",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
         fontSize: 14,
-        color: "black"
+        color: "black",
+        display: "inline-block"
       }}>
         { props.title }
       </div>
