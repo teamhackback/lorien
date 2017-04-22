@@ -26,6 +26,7 @@ const INPUT_STYLE = {
   fontFamily: 'Montserrat',
   outline: `none`,
   textOverflow: `ellipses`,
+	animationDuration: '700ms',
 };
 
 const Map = withGoogleMap(props => (
@@ -50,6 +51,7 @@ const Map = withGoogleMap(props => (
       onPlacesChanged={props.onPlacesChanged}
       inputPlaceholder="Type a name"
       inputStyle={INPUT_STYLE}
+      inputClassName="animated slideInDown"
     />
     {props.markers.map((marker, index) => (
       <Marker position={marker.position} key={index} />
@@ -125,19 +127,26 @@ export default Dimensions()(class LocationPicker extends Component {
             markers={this.state.markers}
           />
         </div>
-        <Link to="/order/extraservices">
-          <Button
-            title="Choose for me"
-            style={{
-            marginTop: -80,
-            position: "fixed",
-            zIndex: 10,
-            width: 250,
-            transform: "translate(-50%, 0%)",
-            left: "50%"
-          }}>
-          </Button>
-        </Link>
+        <div style={{
+          position: "fixed",
+          margin: "0 auto",
+          marginTop: -80,
+          zIndex: 10,
+          width: window.innerWidth,
+        }}>
+          <Link to="/order/extraservices">
+            <Button
+              title="Choose for me"
+              className="animated slideInUp"
+              style={{
+							animationDuration: '700ms',
+							animationDelay: "300ms",
+              width: 250,
+              margin: "0 auto"
+            }}>
+            </Button>
+          </Link>
+        </div>
       </div>
     )
   }
