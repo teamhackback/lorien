@@ -36,6 +36,7 @@ const Map = withGoogleMap(props => (
     onBoundsChanged={props.onBoundsChanged}
     panControl={false}
     defaultOptions={{
+      fullScreenControl: false,
       streetViewControl: false,
       zoomControl: false,
       mapTypeControl: false,
@@ -101,7 +102,7 @@ export default Dimensions()(class LocationPicker extends Component {
     });
   }
   render() {
-    const totalHeight = window.innerHeight - 50;
+    const totalHeight = window.innerHeight - 46;
     return (
       <div>
         <div style={{
