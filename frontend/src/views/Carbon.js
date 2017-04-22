@@ -19,7 +19,8 @@ const valueWrapper = {
   fontSize: 14 + 'px',
   display: 'flex',
   justifyContent: 'space-between',
-  marginTop: 20 + 'px'
+  marginTop: 20 + 'px',
+  padding: '0 10px'
 }
 
 const textWrapper = {
@@ -94,7 +95,7 @@ export default class Carbon extends Component {
           <div style={{width: 100 + '%', textAlign: 'center'}}>
             <img style={{margin: "auto", padding: "40px 0"}} src={'/img/carbon.png'} />
           </div>
-          <div>
+          <div style={{padding: '0 20px'}}>
             <CustomSlider min={500} max={5000000} step={1000} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
           </div>
           <div style={valueWrapper}>
