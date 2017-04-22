@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function ResponsiveTile(props) {
   return (
-    <Link to="/location">
+    <Link to="/order/location">
       <div style={{
         width: "100%",
         padding: 0,
