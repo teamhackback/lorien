@@ -80,11 +80,11 @@ export default class ExtraServices extends Component {
       ]
     };
   }
-  onTap(item, i) {
-    const items = this.state.items;
-    items[i].selected = !items[i].selected;
-    this.setState({items});
-    console.log("select", i);
+
+  onTap(item, i, e) {
+      const items = this.state.items;
+      items[i].selected = !items[i].selected;
+      this.setState({items});
   }
 
   render() {
@@ -105,7 +105,7 @@ export default class ExtraServices extends Component {
         <Slider {...settings}>
           {this.state.items.map((item, i) =>
             <div key={i}>
-              <Tappable onTap={() => this.onTap(item, i)}>
+              <Tappable onTap={(e) => this.onTap(item, i, e)} moveThreshold={5} >
                 <CarouselItem {...item} />
               </Tappable>
             </div>
