@@ -19,18 +19,8 @@ const valueWrapper = {
   fontSize: 14 + 'px',
   display: 'flex',
   justifyContent: 'space-between',
-  marginTop: 20 + 'px'
-}
-
-const textWrapper = {
-  color: "#ebebeb",
-  fontSize: 18 + 'px',
-}
-
-const numTreesWrapper = {
-  margin: "40px 0",
-  color: "#ebebeb",
-  fontSize: 18 + 'px',
+  marginTop: 20 + 'px',
+  marginBottom: 40 + 'px'
 }
 
 const totalPriceWrapper = {
@@ -40,7 +30,6 @@ const totalPriceWrapper = {
   marginBottom: 40 + 'px'
 }
 
-
 const currentValue = {
   fontWeight: 'bold'
 }
@@ -49,41 +38,37 @@ var roundToTwo = (num) => {
     return +(Math.round(num + "e+2")  + "e-2");
 }
 
-var inHumanUnits = (val) => {
-  if(val * 0.001 >= 1000) {
-    // scale slider value to tonnes
-    return roundToTwo(val * 0.000001) + ' t'
-  } else {
-    return roundToTwo(val * 0.001) + ' kg'
-  }
-} 
-
-const chargePerTreePerYear = 10;
-
-var getNumTrees = (val) => {
-  // according to http://sustainability.tufts.edu/carbon-sequestration/
-  // a single pine usual sequesters 6803.890 grams of CO2 per year
-  return Math.ceil(val / 6804)
-}
+const beehiveChargesPerSize = [
+  {
+    'quantity': 1,
+    'amount': 10
+  }, 
+  {
+    'quantity': 2,
+    'amount': 20
+  },
+  {
+    'quantity': 4,
+    'amount': 30
+  },
+];
 
 export default class Carbon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sliderValue: 20000,
-      numTrees: getNumTrees(20000)
+      sliderValue: 2
     }
   }
 
   componentWillMount() {
-    menuTitleStore.title = "Offset your CO₂ footprint";
+    menuTitleStore.title = "Establish a beehive";
     menuTitleStore.progressSelected = 3;
   }
 
   handleSliderChange = (e, v) => {
     this.setState({
-      sliderValue: v,
-      numTrees: getNumTrees(v)
+      sliderValue: v
     });
   }
 
@@ -92,22 +77,19 @@ export default class Carbon extends Component {
       <div style={viewWrapper}>
         <div style={{width: 75 + '%', margin: '0 auto'}}>
           <div style={{width: 100 + '%', textAlign: 'center'}}>
-            <img style={{margin: "auto", padding: "40px 0"}} src={'/img/carbon.png'} />
+            <img style={{margin: "auto", padding: "40px 0", width: "65%"}} src={'/img/beehive.svg'} />
           </div>
           <div>
-            <CustomSlider min={500} max={5000000} step={1000} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
+            <CustomSlider min={1} max={3} step={1} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
           </div>
           <div style={valueWrapper}>
-            <div>0.5 kg</div>
-            <div style={currentValue}>{inHumanUnits(this.state.sliderValue)}</div>
-            <div>5 t</div>
-          </div>
-          <div style={numTreesWrapper}>
-            <p><b>{this.state.numTrees} adult trees</b> to compensate for your carbon footprint</p>
+            <div>Small</div>
+            <div style={currentValue}>Medium</div>
+            <div>Large</div>
           </div>
           <div style={totalPriceWrapper}>
             <p style={{ borderTop: "1px solid #979797", borderBottom: "1px solid #979797", padding: "10px 0"}}>
-              {inHumanUnits(this.state.sliderValue)} of CO₂/year for ${chargePerTreePerYear * this.state.numTrees}
+              {beehiveChargesPerSize[this.state.sliderValue - 1]['quantity'] + "L of honey for $" + beehiveChargesPerSize[this.state.sliderValue - 1]['amount'] + "/month"}
             </p>
           </div>
           <Button title="Confirm" style={{width: 90 + '%', margin: 'auto'}}/>
