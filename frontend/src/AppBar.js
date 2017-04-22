@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
-export default function(props) {
+import menuTitleStore from './MenuTitleStore';
+import {observer} from 'mobx-react';
+
+export default observer(function(props) {
   return (
     <div style={{
       height: 45,
@@ -16,7 +19,7 @@ export default function(props) {
       <div style={{
         fontSize: 14
       }}>
-        Generic title
+        {menuTitleStore.title}
       </div>
       <div style={{
       }}>
@@ -24,4 +27,4 @@ export default function(props) {
       </div>
     </div>
   )
-}
+})

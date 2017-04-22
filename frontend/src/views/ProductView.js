@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import menuTitleStore from '../MenuTitleStore';
+
 
 function ResponsiveTile(props) {
   return (
@@ -64,18 +66,23 @@ const tilesData = [
   },
 ];
 
-export default function(props) {
-  return (
-    <div>
-    <Grid fluid style={{padding: 0, marginLeft: 0, marginRight: 0}}>
-      <Row style={{padding: 0, marginLeft: 0, marginRight: 0}}>
-      { tilesData.map((tile) =>
-        <Col xs={6} md={3} key={tile.id} style={{padding: 0}}>
-          <ResponsiveTile data={tile} />
-        </Col>
-      )}
-      </Row>
-    </Grid>
-  </div>
-  )
+export default class ProductView extends Component {
+  componentWillMount() {
+    menuTitleStore.title = "Pick your tree";
+  }
+  render() {
+    return (
+      <div>
+      <Grid fluid style={{padding: 0, marginLeft: 0, marginRight: 0}}>
+        <Row style={{padding: 0, marginLeft: 0, marginRight: 0}}>
+        { tilesData.map((tile) =>
+          <Col xs={6} md={3} key={tile.id} style={{padding: 0}}>
+            <ResponsiveTile data={tile} />
+          </Col>
+        )}
+        </Row>
+      </Grid>
+    </div>
+    )
+  }
 }
