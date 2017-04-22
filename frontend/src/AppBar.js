@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import menuTitleStore from './MenuTitleStore';
 import {observer} from 'mobx-react';
@@ -36,8 +37,10 @@ export default observer(function(props) {
       paddingLeft: 8,
       paddingRight: 8
     }}>
-    <img src="/img/lorien-circle.svg" alt="Logo" style={{
-    }}/>
+    <Link to="/">
+      <img src="/img/lorien-circle.svg" alt="Logo" style={{
+      }}/>
+    </Link>
       <div style={{
         fontSize: 14
       }}>
