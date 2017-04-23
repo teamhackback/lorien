@@ -53,7 +53,7 @@ export default class Checkout extends Component {
     const location = selectedLocations.length > 0 && selectedLocations[0].title;
     switch(cart.globalCategory) {
       case "tree":
-        mainImg = `/img/trees/${cart.tree.selectedType}.svg`;
+        mainImg = `/img/trees/${cart.tree.selectedType.toLowerCase()}.svg`;
         mainText = `You are going to plant a ${cart.tree.selectedType} tree in ${location}`;
         mainCost = 5;
         break;
