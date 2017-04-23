@@ -7,9 +7,7 @@ class Cart {
     });
     this.load();
     console.log(this);
-    setInterval(() => {
-      this.serialize();
-    }, 500);
+    this.interval = setInterval(this.serialize(), 500);
   }
   globalCategory = null; // null, "beehive", "tree", "carbon"
   beehive = {
@@ -44,6 +42,7 @@ class Cart {
   }
 
   clear = () => {
+    clearInterval(this.interval);
     this.keys.forEach(key => {
       localStorage.removeItem(`cart.${key}`);
     });

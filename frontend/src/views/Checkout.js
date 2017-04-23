@@ -52,7 +52,7 @@ export default class Checkout extends Component {
     super(props);
     const afterPayPal = window.location.pathname.indexOf("thanks") >= 0;
 
-    let mainImg, mainText, mainCost, totalCost, loading;
+    let mainImg, mainText, mainCost, totalCost, loading, premiumServices, globalCategory;
     if (!afterPayPal) {
       const selectedLocations = locations.filter(e => e.selected);
       const location = selectedLocations.length > 0 && selectedLocations[0].title;
@@ -75,6 +75,8 @@ export default class Checkout extends Component {
       }
       totalCost = mainCost + cart.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
       loading = false;
+      globalCategory = cart.globalCategory;
+      premiumServices = cart.premiumServices;
     } else {
       // MAKE request
       loading = true;
@@ -128,7 +130,9 @@ export default class Checkout extends Component {
       mainText,
       mainCost,
       totalCost,
-      loading
+      loading,
+      premiumServices : response.premiumServices,
+      globalCategory: response.globalCategory,
     });
   }
   componentWillMount() {
@@ -153,6 +157,7 @@ export default class Checkout extends Component {
       body: JSON.stringify(obj)
     }).then((response) => {
       response.json().then((body) => {
+        cart.clear();
         window.location = body;
       });
     });
@@ -176,7 +181,7 @@ export default class Checkout extends Component {
             }}/>
 
           {
-            cart.globalCategory === null ?
+            this.state.globalCategory === null ?
             <div style={notice}>
               Your cart is empty!
             </div> :
@@ -216,7 +221,7 @@ export default class Checkout extends Component {
                 { this.state.afterPayPal ? "Total cost:" : "This will cost you:"}  {this.state.mainCost} $ / month
               </div>
 
-              { cart.premiumServices.length > 0 ?
+              { this.state.premiumServices.length > 0 ?
               <div style={{
                 paddingBottom: 20,
               }}>
@@ -224,7 +229,7 @@ export default class Checkout extends Component {
                   paddingBottom: 15
                 }}> Extras: </div>
 
-                  { cart.premiumServices.map((item, i)=>
+                  { this.state.premiumServices.map((item, i)=>
                   <ExtraItem key={i} index={i} data={item} />
                   )}
                   <div style={{
