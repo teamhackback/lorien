@@ -25,8 +25,6 @@ import Apiary from './views/Apiary';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import { RouteTransition } from 'react-router-transition';
-
 require('velocity-animate');
 require('velocity-animate/velocity.ui');
 
@@ -37,49 +35,13 @@ class App extends Component {
         <Router>
           <div>
             <AppBar />
-            <ReactCSSTransitionGroup
-              transitionName="fade"
-              transitionEnterTimeout={3000}
-              transitionLeaveTimeout={300}
-            >
               <Route exact path="/" component={ProductList} />
-             </ReactCSSTransitionGroup>
               <Route path="/order/products" component={ProductView} />
-            <Route path="/order/location">
-               {({ match }) => (
-                <RouteTransition
-                        atEnter={{ opacity: 0 }}
-                        atLeave={{ opacity: 0 }}
-                        atActive={{ opacity: 1 }}
-                        pathname={location.pathname}>
-                    {match && <LocationPicker />}
-                </RouteTransition>
-                )}
-            </Route>
-            <Route path="/order/extraservices">
-               {({ match }) => (
-                <RouteTransition
-                        atEnter={{ opacity: 0 }}
-                        atLeave={{ opacity: 0 }}
-                        atActive={{ opacity: 1 }}
-                        pathname={location.pathname}>
-                    {match && <ExtraServices />}
-                </RouteTransition>
-                )}
-            </Route>
-            <Route path="/products/carbon">
-               {({ match }) => (
-                <RouteTransition
-                        atEnter={{ opacity: 0 }}
-                        atLeave={{ opacity: 0 }}
-                        atActive={{ opacity: 1 }}
-                        pathname={location.pathname}>
-                    {match && <Carbon />}
-                </RouteTransition>
-                )}
-            </Route>
-            <Route path="/order/checkout" component={Checkout} />
-            <Route path="/products/apiary" component={Apiary} />
+              <Route path="/order/location" component={LocationPicker} />
+              <Route path="/order/extraservices" component={ExtraServices} />
+              <Route path="/products/carbon" component={Carbon} />
+              <Route path="/order/checkout" component={Checkout} />
+              <Route path="/products/apiary" component={Apiary} />
           </div>
         </Router>
       </div>
