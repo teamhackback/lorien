@@ -80,6 +80,7 @@ export default class Apiary extends Component {
   handleConfirm = (e) => {
     e.preventDefault();
     cartItems.beehive.size = itemInformation[this.state.sliderValue - 1]['name']
+    cartItems.beehive.value = this.state.sliderValue
     console.log(cartItems);
     this.context.router.history.push("/order/location");
   }
