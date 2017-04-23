@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import {findDOMNode} from 'react-dom';
 import menuTitleStore from '../MenuTitleStore';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import Tappable from 'react-tappable';
+
+import cart from '../CartItems';
 
 function CarouselItem(props) {
 	const defaultBorder = "solid 1px #979797";
@@ -113,6 +116,17 @@ export default class ExtraServices extends Component {
       });
   }
 
+  static contextTypes = { router: React.PropTypes.object }
+
+  onButtonClick = () => {
+    cart.premiumServices = this.state.items.filter(e => e.selected);
+    const node = findDOMNode(this);
+    node.className = "fadeOutEffect";
+    setTimeout(() => {
+      this.context.router.history.push("/order/checkout");
+    }, 300);
+  };
+
   render() {
     const settings = {
       dots: true,
@@ -124,9 +138,9 @@ export default class ExtraServices extends Component {
       centerMode: true,
       centerPadding: '60px',
       className: 'carousel'
-    };
+    }
 
-    return (
+        return (
       <div>
         <div style={{
           position: "fixed",
@@ -167,9 +181,9 @@ export default class ExtraServices extends Component {
         }}>
           {this.state.nrSelected} items selected
         </div>
-        	<Link to="/order/checkout">
         	  <Button
 							className="animated slideInUp"
+              onClick={this.onButtonClick}
         	    title={this.state.nrSelected > 0 ? "Continue" : "Skip for now"}
         	    style={{
 							animationDuration: "700ms",
@@ -178,7 +192,6 @@ export default class ExtraServices extends Component {
               margin: "0 auto"
         	  }}>
         	  </Button>
-        	</Link>
       </div>
     )
   }

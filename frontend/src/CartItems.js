@@ -11,7 +11,7 @@ class Cart {
       this.serialize();
     }, 500);
   }
-  globalCategory = "carbon"; // null, "beehive", "tree", "carbon"
+  globalCategory = null; // null, "beehive", "tree", "carbon"
   beehive = {
     size: "small",
     value: 1
@@ -23,14 +23,6 @@ class Cart {
     nrOfTrees: 0
   };
   premiumServices = [
-    {
-      title: "Foo",
-      cost: 5,
-    },
-    {
-      title: "Bar",
-      cost: 10,
-    }
   ];
 
   load = () => {

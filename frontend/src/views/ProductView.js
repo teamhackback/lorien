@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import menuTitleStore from '../MenuTitleStore';
 import { Link } from 'react-router-dom';
+import cart from '../CartItems';
 
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 //import PageTransition from 'react-router-page-transition';
@@ -36,6 +37,7 @@ class ResponsiveTile extends Component {
       }
     });
 
+    cart.tree.selectedType = this.props.data.name;
     setTimeout(() => {
       this.context.router.history.push("/order/location");
     }, 400);

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import menuTitleStore from '../MenuTitleStore';
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
+import cart from '../CartItems';
 
 const initialDelay = 500;
 
@@ -34,9 +35,16 @@ class Card extends Component {
 			});
 		}, initialDelay + 500);
 	}
+
+  static contextTypes = { router: React.PropTypes.object }
+	onClick = () => {
+    cart.globalCategory = this.props.data.categoryName;
+    this.context.router.history.push(this.props.data.link);
+	};
+
 	render() {
   	return (
-  	  <Link to={this.props.data.link}>
+  	  <div onClick={this.onClick}>
   	    <div style={{
   	      height: 144,
 					...this.props.data.style
@@ -86,7 +94,7 @@ class Card extends Component {
 						</div>
   	    	</div>
   	    </div>
-  	  </Link>
+  	  </div>
   	);
 	}
 }
@@ -100,7 +108,8 @@ const menuItems = [
   style: {
     backgroundColor: "#74be60"
   },
-  link : "/order/products"
+  link : "/order/products",
+  categoryName: "tree"
 },
 {
   id: 2,
@@ -110,7 +119,8 @@ const menuItems = [
   style: {
     backgroundColor: "#9fc74f"
   },
-  link : "/products/apiary"
+  link : "/products/apiary",
+  categoryName: "beehive"
 },
 {
   id: 3,
@@ -120,7 +130,8 @@ const menuItems = [
   style: {
     backgroundColor: "#bfd625"
   },
-  link : "/products/carbon"
+  link : "/products/carbon",
+  categoryName: "carbon"
 }
 ];
 
