@@ -22,6 +22,7 @@ import ExtraServices from './views/ExtraServices';
 import Checkout from './views/Checkout';
 import Carbon from './views/Carbon';
 import Apiary from './views/Apiary';
+import Thankyou from './views/Thankyou';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -40,6 +41,7 @@ class App extends Component {
               <Route path="/order/location" component={LocationPicker} />
               <Route path="/order/extraservices" component={ExtraServices} />
               <Route path="/products/carbon" component={Carbon} />
+              <Route path="/order/thanks" component={Thankyou} />
               <Route path="/order/checkout" component={Checkout} />
               <Route path="/products/apiary" component={Apiary} />
           </div>
