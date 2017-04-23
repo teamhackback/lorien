@@ -142,8 +142,8 @@ export default class Checkout extends Component {
       },
       body: JSON.stringify(obj)
     }).then((response) => {
-      response.blob().then((body) => {
-        console.log(body);
+      response.json().then((body) => {
+        window.location = body;
       });
     });
   }
