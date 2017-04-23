@@ -28,11 +28,11 @@ class Cart {
 
   load = () => {
     this.keys.forEach(key => {
-      this[key] = JSON.parse(localStorage.getItem(`cart.${key}`));
+      this[key] = JSON.parse(localStorage.getItem(`cart.${key}`)) || {};
     });
     if (localStorage.getItem(`cart.locations`) && localStorage.getItem(`cart.locations`).length > 100) {
       locations.length = 0;
-      locations.push.apply(locations, JSON.parse(localStorage.getItem(`cart.locations`)));
+      locations.push.apply(locations, JSON.parse(localStorage.getItem(`cart.locations`) || []));
     }
   }
 

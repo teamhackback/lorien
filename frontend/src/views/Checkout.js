@@ -127,10 +127,24 @@ export default class Checkout extends Component {
   }
 
   handleClick = (e) => {
-    console.log('sending:' + JSON.stringify(cart))
-    fetch('http://localhost:8001/api/order', {
+    const obj = {
+        totalCost: this.state.totalCost,
+        mainCost: this.state.mainCost,
+        locations,
+        ...cart,
+      };
+    console.log('sending:' + JSON.stringify(obj))
+    fetch('https://lorien.hackback.tech/api/order', {
       method: 'post',
-      body: JSON.stringify(cart)
+      mode: 'cors',
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify(obj)
+    }).then((response) => {
+      response.blob().then((body) => {
+        console.log(body);
+      });
     });
   }
 
@@ -218,9 +232,7 @@ export default class Checkout extends Component {
                 paddingTop: 40
               }}>
                 <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.25 + 's', marginBottom: 20 + 'px'}} className="animated fadeInDown">
-                  <Link to="/">
-                    <Button title="Continue Shopping" style={{width: 90 + '%', margin: 'auto'}}/>
-                  </Link>
+                    <Button onClick={this.handleClick} title="Finish shopping" style={{width: 90 + '%', margin: 'auto'}}/>
                 </div>
 
                 <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.5 + 's'}} className="animated fadeInDown">
