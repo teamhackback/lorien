@@ -22,7 +22,7 @@ function CarouselItem(props) {
 			marginBottom: props.selected ? 0 : 5
     }}>
     <div  alt="carousel" style={{
-			height: "220px",
+			height: "30vh",
 			width: "100%",
 			backgroundImage: `url(${props.img})`,
 			backgroundSize: "cover",
@@ -127,21 +127,31 @@ export default class ExtraServices extends Component {
     };
 
     return (
-      <div style={{
-        minHeight: window.innerHeight - 40,
-        backgroundImage: "url('/img/extraservices/background.jpg')",
-        backgroundSize: "cover",
-        paddingTop: "12%"
-      }}>
-        <Slider {...settings}>
-          {this.state.items.map((item, i) =>
-            <div key={i}>
-              <Tappable onTap={(e) => this.onTap(item, i, e)} moveThreshold={5} >
-                <CarouselItem {...item} />
-              </Tappable>
-            </div>
-          )}
-        </Slider>
+      <div>
+        <div style={{
+          position: "fixed",
+          zIndex: -1,
+          top: 46,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: "url('/img/extraservices/background.jpg')",
+          backgroundSize: "cover",
+
+        }} />
+        <div style={{
+          paddingTop: "4vh"
+          }}>
+          <Slider {...settings}>
+            {this.state.items.map((item, i) =>
+              <div key={i}>
+                <Tappable onTap={(e) => this.onTap(item, i, e)} moveThreshold={5} >
+                  <CarouselItem {...item} />
+                </Tappable>
+              </div>
+            )}
+          </Slider>
+        </div>
         <div
 				className="animated zoomIn"
 				style={{
@@ -151,8 +161,8 @@ export default class ExtraServices extends Component {
           opacity: 0.5,
           fontSize: 14,
           fontWeight: 300,
-          marginTop: "10%",
-          marginBottom: "10%",
+          marginTop: "4vh",
+          marginBottom: "4vh",
           color: "white"
         }}>
           {this.state.nrSelected} items selected

@@ -118,7 +118,7 @@ export default Dimensions()(class LocationPicker extends Component {
       lng: 26.715859
     },
     markers: locations,
-		hasSelectedMarker: false
+		hasSelectedMarker: locations.filter(e => e.selected).length > 0
   }
   componentWillMount() {
     menuTitleStore.title = "Where should we put it?";
@@ -187,9 +187,10 @@ export default Dimensions()(class LocationPicker extends Component {
 		});
 
 		markers[i].showInfo = !markers[i].showInfo;
-		this.selectMarker(i);
 		this.setState({
 			markers
+		}, () => {
+		  this.selectMarker(i);
 		});
 	};
 
@@ -224,7 +225,8 @@ export default Dimensions()(class LocationPicker extends Component {
 			markers[i].showInfo = true;
 		}
 		this.setState({
-			markers
+			markers,
+			hasSelectedMarker: true
 		});
 	}
 
@@ -240,7 +242,16 @@ export default Dimensions()(class LocationPicker extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		const markers = this.state.markers.filter(marker => {
+			return marker.isSearchResult === undefined;
+		});
+		locations.length = 0;
+		locations.push.apply(locations, markers);
+	}
+
   render() {
+    console.log("foo", window.innerHeight);
     const totalHeight = window.innerHeight - 46;
     return (
       <div>
@@ -250,7 +261,7 @@ export default Dimensions()(class LocationPicker extends Component {
         }}>
           <Map
             containerElement={
-              <div style={{ height: `100%` }} />
+              <div style={{ height: totalHeight }} />
             }
             mapElement={
               <div style={{ height: `100%` }} />

@@ -28,7 +28,6 @@ class Card extends Component {
 				    duration: 2000,
 						style: {
 							width: "60px",
-							height: "70px",
 						}
 					}
 				}
