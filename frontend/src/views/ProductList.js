@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import menuTitleStore from '../MenuTitleStore';
 import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
+const initialDelay = 500;
 
 class Card extends Component {
 	elements = {};
 	state = {
 		animation: {
 			img: {
-				duration: 2000,
 				style: {
 					height: null
 				}
@@ -25,6 +25,7 @@ class Card extends Component {
 			this.setState({
 				animation: {
 					img: {
+				    duration: 2000,
 						style: {
 							width: "60px",
 							height: "70px",
@@ -32,7 +33,7 @@ class Card extends Component {
 					}
 				}
 			});
-		}, 500);
+		}, initialDelay + 500);
 	}
 	render() {
   	return (
@@ -129,11 +130,9 @@ export default class ProductList extends Component {
 	state = {
 		animation: {
 			img: {
-				duration: 600,
 				style: {height: null}
 			},
 			list: {
-				duration: 1000,
 				style: {height: null}
 			}
 		}
@@ -148,22 +147,26 @@ export default class ProductList extends Component {
 		this.elements.img.style.width = "300px";
 		this.elements.img.style.height = "300px";
 		this.elements.img.style.marginTop = (window.innerWidth /  3) + "px";
-		this.setState({
-			animation: {
-				img: {
-					style: {
-						width: 69,
-						height: 90,
-						marginTop: 22
-					}
-				},
-				list: {
-					style: {
-						marginTop: 0,
-					}
-				}
-			}
-		});
+		setTimeout(() => {
+		  this.setState({
+		  	animation: {
+		  		img: {
+				    duration: 600,
+		  			style: {
+		  				width: 69,
+		  				height: 90,
+		  				marginTop: 22
+		  			}
+		  		},
+		  		list: {
+				    duration: 1000,
+		  			style: {
+		  				marginTop: 0,
+		  			}
+		  		}
+		  	}
+		  });
+		}, initialDelay);
 	}
 
   handleCardClick(isCardSelected) {
@@ -173,7 +176,7 @@ export default class ProductList extends Component {
   render() {
     const height = window.innerHeight;
     const width = "100%";
-console.log(this.state.animation.img.style);
+console.log(this.state.animation.img.duration);
     return (
 
 		<div>
