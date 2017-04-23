@@ -138,7 +138,7 @@ export default class Checkout extends Component {
     });
   }
   componentWillMount() {
-    menuTitleStore.title = "Checkout";
+    menuTitleStore.title = this.state.afterPayPal ? "Success" : "CheckOut";
     menuTitleStore.progressSelected = 3;
   }
 
@@ -245,6 +245,7 @@ export default class Checkout extends Component {
               </div>
               : null }
 
+              { this.state.afterPayPal  ? null :
               <div style={{
                 paddingTop: 40
               }}>
@@ -258,6 +259,7 @@ export default class Checkout extends Component {
                     </div>
                 </div>
               </div>
+                }
             </div>
           }
           </div>
