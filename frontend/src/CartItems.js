@@ -5,23 +5,30 @@ class Cart {
     this.keys = Object.keys(this).filter(key => {
       return typeof this[key] !== "function";
     });
-    this.load();
+    //this.load();
     console.log(this);
     setInterval(() => {
       this.serialize();
     }, 500);
   }
-  globalCategory = null; // "beehive", "tree", "carbon"
+  globalCategory = "tree"; // "beehive", "tree", "carbon"
   beehive = {
-    size: null
+    size: "small"
   };
   tree = {
-    selectedType: null
+    selectedType: "pine"
   };
   carbon = {
     nrOfTrees: null
   };
-  premiumService = [];
+  premiumService = [
+    {
+      title: "Foo",
+    },
+    {
+      title: "Bar",
+    }
+  ];
 
   load = () => {
     this.keys.forEach(key => {

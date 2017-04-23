@@ -60,7 +60,7 @@ function CarouselItem(props) {
           	  {props.subtitle}
           	</div>
           	<div>
-          	  Cost: {props.cost}
+          	  Cost: {props.cost}$ / month
           	</div>
           </div>
         </div>
@@ -80,25 +80,25 @@ export default class ExtraServices extends Component {
           img: "/img/extraservices/drone.png",
           title: "The drone gardener",
           subtitle: "Makes your mother happy",
-          cost: "+200$ / month"
+          cost: 200
         },
         {
           img: "/img/extraservices/beehive.png",
           title: "Apiary",
           subtitle: "Gives you honey",
-          cost: "+15$ / month"
+          cost: 15
         },
         {
           img: "/img/extraservices/satellite.png",
           title: "Satellite observation",
           subtitle: "Continuous monitoring from the sky",
-          cost: "+200$ / month"
+          cost: 200
         },
         {
           img: "/img/extraservices/tree.png",
           title: "Premium support",
           subtitle: "More care, more checkins",
-          cost: "+200$ / month"
+          cost: 200
         }
       ]
     };
