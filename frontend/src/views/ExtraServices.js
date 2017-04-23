@@ -63,7 +63,7 @@ function CarouselItem(props) {
           	  {props.subtitle}
           	</div>
           	<div>
-          	  Cost: {props.cost}$ / month
+          	  Cost: € {props.cost} / month
           	</div>
           </div>
         </div>
