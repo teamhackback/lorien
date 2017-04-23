@@ -90,7 +90,7 @@ export default class Apiary extends Component {
         <div style={{width: 75 + '%', margin: '0 auto'}}>
           <div style={{width: 100 + '%', textAlign: 'center'}}>
             <VelocityTransitionGroup enter={{animation: "transition.flipXIn", duration: 1000}} leave={{animation: "slideUp"}} runOnMount={true}>
-              <img style={{margin: "auto", padding: "40px 0", width: "65%"}} src={'/img/beehive.svg'} alt="beehive"/>
+              <img style={{margin: "auto", padding: "40px 0", width: "65%"}} src={'/img/apiary' + this.state.sliderValue + '.svg'} alt="beehive"/>
             </VelocityTransitionGroup>
           </div>
 
