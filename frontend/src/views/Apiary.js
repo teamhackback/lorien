@@ -50,6 +50,8 @@ const itemInformation = [
 ];
 
 export default class Apiary extends Component {
+  static contextTypes = { router: React.PropTypes.object }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -77,16 +79,9 @@ export default class Apiary extends Component {
 
   handleConfirm = (e) => {
     e.preventDefault();
-
-    let item = {
-      name: itemInformation[this.state.sliderValue - 1]['name'],
-      sku: itemInformation[this.state.sliderValue - 1]['name'],
-      price: itemInformation[this.state.sliderValue - 1]['price'],
-      currency: 'EUR',
-      quantity: 1
-    }
-
-    cartItems.beehives.push(item)
+    cartItems.beehive.size = itemInformation[this.state.sliderValue - 1]['name']
+    console.log(cartItems);
+    this.context.router.history.push("/order/location");
   }
 
   render() {
