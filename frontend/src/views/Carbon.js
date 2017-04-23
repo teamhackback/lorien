@@ -4,6 +4,7 @@ import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
 import Button from '../components/Button';
 import CustomSlider from '../components/Slider';
+import cartItems from '../CartItems';
 
 const viewWrapper = {
   height: 100 + "vh",
@@ -70,6 +71,8 @@ var getNumTrees = (val) => {
 }
 
 export default class Carbon extends Component {
+  static contextTypes = { router: React.PropTypes.object }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -88,6 +91,13 @@ export default class Carbon extends Component {
       sliderValue: v,
       numTrees: getNumTrees(v)
     });
+  }
+
+  handleConfirm = (e) => {
+    e.preventDefault();
+    cartItems.carbon.nrOfTrees = this.state.numTrees
+    console.log(cartItems);
+    this.context.router.history.push("/order/location");
   }
 
   render() {
@@ -118,7 +128,7 @@ export default class Carbon extends Component {
             </p>
           </div>
           <div style={{ animationDuration: 0.5 + 's', animationDelay: 1.25 + 's'}} className="animated fadeInDown">
-            <Button title="Confirm" style={{width: 90 + '%', margin: 'auto'}}/>
+            <Button title="Confirm" style={{margin: 'auto'}} onClick={this.handleConfirm}/>
           </div>
         </div>
 
