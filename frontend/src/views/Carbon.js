@@ -80,6 +80,10 @@ export default class Carbon extends Component {
       sliderValue: 20000,
       numTrees: getNumTrees(20000)
     }
+    if (cartItems.carbon.nrOfTrees > 0) {
+      this.state.sliderValue = cartItems.carbon.sliderValue;
+      this.state.numTrees = cartItems.carbon.nrOfTrees;
+    }
   }
 
   componentWillMount() {
@@ -96,7 +100,8 @@ export default class Carbon extends Component {
 
   handleConfirm = (e) => {
     e.preventDefault();
-    cartItems.carbon.nrOfTrees = this.state.numTrees
+    cartItems.carbon.nrOfTrees = this.state.numTrees;
+    cartItems.carbon.sliderValue = this.state.sliderValue;
     cartItems.carbon.co2 = inHumanUnits(this.state.sliderValue);
     console.log(cartItems);
 

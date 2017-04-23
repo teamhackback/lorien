@@ -19,6 +19,7 @@ class Cart {
   };
   carbon = {
     nrOfTrees: 0,
+    sliderValue: 0,
     co2: "5t"
   };
   premiumServices = [
