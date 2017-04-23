@@ -97,7 +97,9 @@ export default class Checkout extends Component {
       mainCost,
       totalCost,
       afterPayPal,
-      loading
+      loading,
+      premiumServices,
+      globalCategory
     }
   }
   loadThankYou(response) {
