@@ -6,7 +6,7 @@ import {observer} from 'mobx-react';
 
 function ProgressBar(props) {
   const radius = props.radius || 2.5;
-  const maxElements = props.maxElements || 5;
+  const maxElements = props.maxElements || 4;
   const selectedElement = props.selected || 0;
   return (
     <div>

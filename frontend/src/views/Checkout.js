@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import menuTitleStore from '../MenuTitleStore';
 import Button from '../components/Button';
 import {Link} from 'react-router-dom';
-import cartItems from '../CartItems';
+import cart from '../CartItems';
 
 const viewWrapper = {
   height: 100 + "vh",
@@ -31,30 +31,31 @@ export default class Checkout extends Component {
       <div style={viewWrapper}>
         <div style={{width: 75 + '%', margin: '0 auto'}}>
           {
-            cartItems.beehives.length === 0 && cartItems.trees.length === 0 && cartItems.carbonCredits.length === 0 ? 
+            cart.globalCategory === null ?
             <div style={notice}>
               Your cart is empty!
             </div> :
-            cartItems.beehives.map((item, i) => {
-              console.log(item)
-            })
+            <div>
+              Shopping cart.
+            </div>
           }
-
-          <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.25 + 's', marginBottom: 20 + 'px'}} className="animated fadeInDown">
-            <Link to="/">
-              <Button title="Continue Shopping" style={{width: 90 + '%', margin: 'auto'}}/>
-            </Link>
-          </div>
 
           {
-            cartItems.beehives.length === 0 && cartItems.trees === 0 && cartItems.carbonCredits === 0 ? 
-              ''
-            : <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.5 + 's'}} className="animated fadeInDown">
-                <div style={{textAlign: 'center'}} >
-                  <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
-                </div>
+            cart.globalCategory !== null ?
+            <div>
+              <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.25 + 's', marginBottom: 20 + 'px'}} className="animated fadeInDown">
+                <Link to="/">
+                  <Button title="Continue Shopping" style={{width: 90 + '%', margin: 'auto'}}/>
+                </Link>
               </div>
-          }
+
+              <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.5 + 's'}} className="animated fadeInDown">
+                  <div style={{textAlign: 'center'}} >
+                    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
+                  </div>
+              </div>
+            </div>
+          : null}
 
 
 
