@@ -95,7 +95,8 @@ export default class Carbon extends Component {
 
   handleConfirm = (e) => {
     e.preventDefault();
-    cartItems.carbon.nrOfTrees = this.state.numTrees
+    cartItems.carbon.nrOfTrees = this.state.numTrees;
+    cartItems.carbon.co2 = inHumanUnits(this.state.sliderValue);
     console.log(cartItems);
     this.context.router.history.push("/order/location");
   }

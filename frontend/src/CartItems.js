@@ -20,7 +20,8 @@ class Cart {
     selectedType: "pine"
   };
   carbon = {
-    nrOfTrees: 0
+    nrOfTrees: 0,
+    co2: "5t"
   };
   premiumServices = [
   ];

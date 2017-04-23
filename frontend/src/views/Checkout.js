@@ -55,17 +55,17 @@ export default class Checkout extends Component {
       case "tree":
         mainImg = `/img/trees/${cart.tree.selectedType.toLowerCase()}.svg`;
         mainText = `You are going to plant a ${cart.tree.selectedType} tree in ${location}`;
-        mainCost = 5;
+        mainCost = 50;
         break;
       case "beehive":
         mainImg = `/img/apiary${cart.beehive.value}.svg`;
-        mainText = `You are going to plant a ${cart.beehive.size} beehive in ${location}`;
-        mainCost = 10;
+        mainText = `You are going to plant a ${cart.beehive.size.toLowerCase()} beehive in ${location}`;
+        mainCost = 100 * cart.beehive.value;
         break;
       case "carbon":
         mainImg = `/img/carbon.png`;
-        mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location}`;
-        mainCost = 15;
+        mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location} to compensate for ${cart.carbon.co2} of carbon footprint`;
+        mainCost = 10 * cart.carbon.nrOfTrees;
         break;
     }
     const totalCost = mainCost + cart.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
@@ -132,6 +132,7 @@ export default class Checkout extends Component {
                 This will cost you:  {this.state.mainCost} $ / month
               </div>
 
+              { cart.premiumServices.length > 0 ?
               <div style={{
                 paddingBottom: 20,
               }}>
@@ -151,6 +152,7 @@ export default class Checkout extends Component {
                     Total: {this.state.totalCost}$/m
                   </div>
               </div>
+              : null }
 
               <div style={{
                 paddingTop: 40
