@@ -42,6 +42,12 @@ class Cart {
     });
     localStorage.setItem(`cart.locations`, JSON.stringify(locations));
   }
+
+  clear = () {
+    this.keys.forEach(key => {
+      localStorage.removeItem(`cart.${key}`);
+    });
+  }
 }
 
 export default new Cart();

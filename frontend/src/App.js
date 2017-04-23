@@ -41,7 +41,8 @@ class App extends Component {
               <Route path="/order/location" component={LocationPicker} />
               <Route path="/order/extraservices" component={ExtraServices} />
               <Route path="/products/carbon" component={Carbon} />
-              <Route path="/order/thanks" component={Thankyou} />
+              <Route exact path="/order/thanks" component={Thankyou} />
+              <Route path="/order/thanks/:id" component={Checkout} />
               <Route path="/order/checkout" component={Checkout} />
               <Route path="/products/apiary" component={Apiary} />
           </div>

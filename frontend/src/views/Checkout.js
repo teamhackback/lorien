@@ -46,35 +46,74 @@ function ExtraItem(props) {
 
 
 export default class Checkout extends Component {
+
+  static contextTypes = { router: React.PropTypes.object }
   constructor(props) {
     super(props);
-    let mainImg, mainText, mainCost;
-    const selectedLocations = locations.filter(e => e.selected);
-    const location = selectedLocations.length > 0 && selectedLocations[0].title;
-    switch(cart.globalCategory) {
-      case "tree":
-        mainImg = `/img/trees/${cart.tree.selectedType.toLowerCase()}.svg`;
-        mainText = `You are going to plant a ${cart.tree.selectedType} tree in ${location}`;
-        mainCost = 50;
-        break;
-      case "beehive":
-        mainImg = `/img/apiary${cart.beehive.value}.svg`;
-        mainText = `You are going to plant a ${cart.beehive.size.toLowerCase()} beehive in ${location}`;
-        mainCost = 100 * cart.beehive.value;
-        break;
-      case "carbon":
-        mainImg = `/img/carbon.png`;
-        mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location} to compensate for ${cart.carbon.co2} of carbon footprint`;
-        mainCost = 10 * cart.carbon.nrOfTrees;
-        break;
+    const afterPayPal = window.location.pathname.indexOf("thanks") >= 0;
+
+    let mainImg, mainText, mainCost, totalCost, loading;
+    if (!afterPayPal) {
+      const selectedLocations = locations.filter(e => e.selected);
+      const location = selectedLocations.length > 0 && selectedLocations[0].title;
+      switch(cart.globalCategory) {
+        case "tree":
+          mainImg = `/img/trees/${cart.tree.selectedType.toLowerCase()}.svg`;
+          mainText = `You are going to plant a ${cart.tree.selectedType} tree in ${location}`;
+          mainCost = 50;
+          break;
+        case "beehive":
+          mainImg = `/img/apiary${cart.beehive.value}.svg`;
+          mainText = `You are going to plant a ${cart.beehive.size.toLowerCase()} beehive in ${location}`;
+          mainCost = 100 * cart.beehive.value;
+          break;
+        case "carbon":
+          mainImg = `/img/carbon.png`;
+          mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location} to compensate for ${cart.carbon.co2} of carbon footprint`;
+          mainCost = 10 * cart.carbon.nrOfTrees;
+          break;
+      }
+      totalCost = mainCost + cart.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
+      loading = false;
+    } else {
+      // MAKE request
+      loading = true;
+      const orderId = window.location.pathname.split("/").slice(-1)[0];
+      console.log("orderId", orderId);
     }
-    const totalCost = mainCost + cart.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
     this.state = {
       mainImg,
       mainText,
       mainCost,
-      totalCost
+      totalCost,
+      afterPayPal,
+      loading
     }
+  }
+  loadThankYou() {
+    let mainImg, mainText, mainCost, totalCost;
+    const loading = false;
+    mainText = "We received your order for ";
+    const response = {};
+    switch(response.globalCategory) {
+      case "tree":
+        mainImg = `/img/trees/${response.tree.selectedType.toLowerCase()}.svg`;
+        mainText += `a ${response.tree.selectedType} tree in ${location}`;
+        mainCost = 50;
+        break;
+      case "beehive":
+        mainImg = `/img/apiary${response.beehive.value}.svg`;
+        mainText = `planting ${response.beehive.size.toLowerCase()} beehive in ${location}`;
+        mainCost = 100 * response.beehive.value;
+        break;
+      case "carbon":
+        mainImg = `/img/carbon.png`;
+        mainText = `adaption of ${response.carbon.nrOfTrees} trees in ${location} to compensate for ${response.carbon.co2} of carbon footprint`;
+        mainCost = 10 * response.carbon.nrOfTrees;
+        break;
+    }
+    totalCost = mainCost + response.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
+
   }
   componentWillMount() {
     menuTitleStore.title = "Checkout";
@@ -84,12 +123,19 @@ export default class Checkout extends Component {
   render() {
     return (
       <div style={viewWrapper}>
-          <img src="/dummy/checkoutbg.png" style={{
-            marginTop: 20,
-            maxWidth: 30,
-            maxHeight: 30,
-            float: "left"
-          }}/>
+          { this.state.loading === true ? <div style={{
+              margin: "0 auto",
+              textAlign: "center",
+              paddingTop: "20vh",
+              fontSize: 40,
+          }}>Loading</div> :
+          <div>
+            <img src="/dummy/checkoutbg.png" style={{
+              marginTop: 20,
+              maxWidth: 30,
+              maxHeight: 30,
+              float: "left"
+            }}/>
 
           {
             cart.globalCategory === null ?
@@ -171,6 +217,8 @@ export default class Checkout extends Component {
               </div>
             </div>
           }
+          </div>
+        }
       </div>
     )
   }
