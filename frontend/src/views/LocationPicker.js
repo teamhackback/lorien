@@ -44,6 +44,28 @@ const INPUT_STYLE = {
 	animationDuration: '700ms',
 };
 
+function getDistanceFromLatLonInKm(p1, p2) {
+	const lat1 = p1.lat;
+	const lon1 = p1.lon || p1.lng;
+	const lat2 = p2.lat;
+	const lon2 = p2.lon || p2.lng;
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
 const Map = withGoogleMap(props => {
 	return (
   <GoogleMap
@@ -52,6 +74,7 @@ const Map = withGoogleMap(props => {
     center={props.center}
     onBoundsChanged={props.onBoundsChanged}
     panControl={false}
+		onClick={props.closeAllLabels}
     defaultOptions={{
       fullscreenControl: false,
       streetViewControl: false,
@@ -70,7 +93,7 @@ const Map = withGoogleMap(props => {
       inputClassName="animated slideInDown searchBox"
     />
     {props.markers.map((marker, index) =>
-      <Marker position={marker.position} key={index} title={marker.title} onClick={() => props.onMarkerClicked(marker, index)} icon={getCircle(marker)}>
+      <Marker position={marker.position} key={index} title={marker.title} onClick={() => props.onMarkerClicked(marker, index)} icon={marker.isSearchResult ? undefined : getCircle(marker)}>
 				{ marker.showInfo  && (
           <InfoWindow onCloseClick={() => props.onMarkerClosed(marker, index)}>
             <div>{marker.title}</div>
@@ -118,24 +141,46 @@ export default Dimensions()(class LocationPicker extends Component {
 
   handlePlacesChanged = () => {
     const places = this._searchBox.getPlaces();
+		const markers = this.state.markers;
+		let nrMarkers = markers.length;
+		if (places.length === 0) {
+			return;
+		}
 
-    // Add a marker for each place returned from search bar
-    const markers = places.map(place => ({
-      position: place.geometry.location,
-    }));
+		if (markers[nrMarkers - 1].isSearchResult === undefined ) {
+    	// Add a marker for each place returned from search bar
+    	markers.push(places.map(place => ({
+				id: nrMarkers,
+				isSearchResult: true
+    	}))[0]);
+			nrMarkers++;
+		}
+
+		console.log(places);
+		markers[nrMarkers -1].position = {
+			lat: places[0].geometry.location.lat(),
+			lng: places[0].geometry.location.lng()
+		};
+		markers[nrMarkers -1].title = places[0].formatted_address;
+		markers[nrMarkers -1].showInfo = true;
 
     // Set markers; set map center to first search result
-    //const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
-		const mapCenter = this.state.center;
+		const mapCenter = markers[nrMarkers - 1].position;
 
+		// select nearest forest
+		const markersSorted = markers.slice().sort((a, b) => {
+			return getDistanceFromLatLonInKm(mapCenter, b.position)
+					< getDistanceFromLatLonInKm(mapCenter, a.position);
+		});
     this.setState({
       center: mapCenter,
       markers,
-    });
+    }, () => {
+			this.selectMarker(markersSorted[1].index, false);
+		});
   };
 
 	onMarkerClicked = (marker, i) => {
-		console.log(marker);
 		const markers = this.state.markers.map(marker => {
 			marker.showInfo = false;
 			return marker;
@@ -156,13 +201,28 @@ export default Dimensions()(class LocationPicker extends Component {
 		});
 	};
 
-	selectMarker = (i) => {
+	closeAllLabels = (marker, i) => {
+		const markers = this.state.markers.map(marker => {
+			marker.showInfo = false;
+			return marker;
+		});
+		this.setState({
+			markers
+		});
+	};
+
+	selectMarker = (i, showInfo = true) => {
+		if( this.state.markers[i].isSearchResult ) {
+			return;
+		}
 		const markers = this.state.markers.map(marker => {
 			marker.selected = false;
 			return marker;
 		});
 		markers[i].selected = true;
-		markers[i].showInfo = true;
+		if (showInfo) {
+			markers[i].showInfo = true;
+		}
 		this.setState({
 			markers
 		});
@@ -203,6 +263,7 @@ export default Dimensions()(class LocationPicker extends Component {
             onPlacesChanged={this.handlePlacesChanged}
 						onMarkerClicked={this.onMarkerClicked}
 						onMarkerClosed={this.onMarkerClosed}
+						closeAllLabels={this.closeAllLabels}
             markers={locations}
 						locations={[]}
           />

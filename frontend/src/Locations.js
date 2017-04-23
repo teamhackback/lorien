@@ -124,8 +124,9 @@ const locations = [
   ]
 }];
 
-locations.forEach(location => {
+locations.forEach((location, i)=> {
   location.position = location.path[0];
+	location.index = i;
 })
 
 export default locations;
