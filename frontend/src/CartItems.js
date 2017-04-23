@@ -11,7 +11,7 @@ class Cart {
       this.serialize();
     }, 500);
   }
-  globalCategory = "tree"; // "beehive", "tree", "carbon"
+  globalCategory = "tree"; // null, "beehive", "tree", "carbon"
   beehive = {
     size: "small"
   };
@@ -19,14 +19,16 @@ class Cart {
     selectedType: "pine"
   };
   carbon = {
-    nrOfTrees: null
+    nrOfTrees: 0
   };
-  premiumService = [
+  premiumServices = [
     {
       title: "Foo",
+      cost: 5,
     },
     {
       title: "Bar",
+      cost: 10,
     }
   ];
 

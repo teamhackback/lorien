@@ -48,16 +48,27 @@ function ExtraItem(props) {
 export default class Checkout extends Component {
   constructor(props) {
     super(props);
-    let mainImg, mainText, mainCost,totalCost;
-    const location = "Helsinki";
+    let mainImg, mainText, mainCost;
+    const selectedLocations = locations.filter(e => e.selected);
+    const location = selectedLocations.length > 0 && selectedLocations[0].title;
     switch(cart.globalCategory) {
       case "tree":
         mainImg = `/img/trees/${cart.tree.selectedType}.svg`;
         mainText = `You are going to plant a ${cart.tree.selectedType} tree in ${location}`;
         mainCost = 5;
         break;
+      case "beehive":
+        mainImg = `/img/beehive.svg`;
+        mainText = `You are going to plant a ${cart.behive.size} beehive in ${location}`;
+        mainCost = 10;
+        break;
+      case "carbon":
+        mainImg = `/img/carbon.svg`;
+        mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location}`;
+        mainCost = 15;
+        break;
     }
-    totalCost = 100;
+    const totalCost = mainCost + cart.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
     this.state = {
       mainImg,
       mainText,
@@ -128,7 +139,7 @@ export default class Checkout extends Component {
                   paddingBottom: 15
                 }}> Extras: </div>
 
-                  { cart.premiumService.map((item, i)=>
+                  { cart.premiumServices.map((item, i)=>
                   <ExtraItem key={i} index={i} data={item} />
                   )}
                   <div style={{
