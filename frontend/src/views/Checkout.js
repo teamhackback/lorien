@@ -69,7 +69,7 @@ export default class Checkout extends Component {
           break;
         case "carbon":
           mainImg = `/img/carbon.png`;
-          mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location} to compensate for ${cart.carbon.co2} of carbon footprint`;
+          mainText = `You are going to adopt ${cart.carbon.nrOfTrees} trees in ${location} to compensate for ${cart.carbon.co2} of carbon footprint`;
           mainCost = 10 * cart.carbon.nrOfTrees;
           break;
       }

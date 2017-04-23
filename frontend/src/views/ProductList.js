@@ -149,7 +149,7 @@ export default class ProductList extends Component {
 	}
   componentWillMount() {
     menuTitleStore.title = "Pick your product";
-    menuTitleStore.progressSelected = 1;
+    menuTitleStore.progressSelected = 0;
   }
 
   componentDidMount() {

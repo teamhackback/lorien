@@ -55,9 +55,17 @@ export default class Apiary extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      sliderValue: 2,
-      doAnimate: 0
+    if(cartItems.beehive.value !== 1)
+    {
+      this.state = {
+        sliderValue: cartItems.beehive.value,
+        doAnimate: 0
+      }
+    } else {
+      this.state = {
+        sliderValue: 1,
+        doAnimate: 0
+      }
     }
   }
 
