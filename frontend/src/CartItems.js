@@ -5,7 +5,7 @@ class Cart {
     this.keys = Object.keys(this).filter(key => {
       return typeof this[key] !== "function";
     });
-    //this.load();
+    this.load();
     console.log(this);
     setInterval(() => {
       this.serialize();
