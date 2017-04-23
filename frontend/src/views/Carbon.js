@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import Slider from 'material-ui/Slider';
 import menuTitleStore from '../MenuTitleStore';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
 import Button from '../components/Button';
 import CustomSlider from '../components/Slider';
@@ -32,13 +30,17 @@ const numTreesWrapper = {
   margin: "40px 0",
   color: "#ebebeb",
   fontSize: 18 + 'px',
+  animationDuration: 0.5 + 's',
+  animationDelay: 0.75 + 's'
 }
 
 const totalPriceWrapper = {
   textAlign: 'center',
   color: "#ebebeb",
   fontSize: 14 + 'px',
-  marginBottom: 40 + 'px'
+  marginBottom: 40 + 'px',
+  animationDuration: 0.5 + 's',
+  animationDelay: 1 + 's'
 }
 
 
@@ -93,25 +95,31 @@ export default class Carbon extends Component {
       <div style={viewWrapper}>
         <div style={{width: 75 + '%', margin: '0 auto'}}>
           <div style={{width: 100 + '%', textAlign: 'center'}}>
-            <img style={{margin: "auto", padding: "40px 0"}} src={'/img/carbon.png'} />
+            <VelocityTransitionGroup enter={{animation: "transition.flipXIn", duration: 1000}} leave={{animation: "slideUp"}} runOnMount={true}>
+            <img style={{margin: "auto", padding: "40px 0"}} src={'/img/carbon.png'} alt="carbon" />
+            </VelocityTransitionGroup>
           </div>
-          <div style={{padding: '0 20px'}}>
-            <CustomSlider min={500} max={5000000} step={1000} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
+          <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.25 + 's'}} className="animated fadeInDown">
+            <div style={{padding: '0 20px'}}>
+              <CustomSlider min={500} max={5000000} step={1000} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
+            </div>
+            <div style={valueWrapper}>
+              <div>0.5 kg</div>
+              <div style={currentValue}>{inHumanUnits(this.state.sliderValue)}</div>
+              <div>5 t</div>
+            </div>
           </div>
-          <div style={valueWrapper}>
-            <div>0.5 kg</div>
-            <div style={currentValue}>{inHumanUnits(this.state.sliderValue)}</div>
-            <div>5 t</div>
-          </div>
-          <div style={numTreesWrapper}>
+          <div style={numTreesWrapper} className="animated fadeInDown">
             <p><b>{this.state.numTrees} adult trees</b> to compensate for your carbon footprint</p>
           </div>
-          <div style={totalPriceWrapper}>
+          <div style={totalPriceWrapper} className="animated fadeInDown">
             <p style={{ borderTop: "1px solid #979797", borderBottom: "1px solid #979797", padding: "10px 0"}}>
               {inHumanUnits(this.state.sliderValue)} of CO₂/year for ${chargePerTreePerYear * this.state.numTrees}
             </p>
           </div>
-          <Button title="Confirm" style={{width: 90 + '%', margin: 'auto'}}/>
+          <div style={{ animationDuration: 0.5 + 's', animationDelay: 1.25 + 's'}} className="animated fadeInDown">
+            <Button title="Confirm" style={{width: 90 + '%', margin: 'auto'}}/>
+          </div>
         </div>
 
       </div>

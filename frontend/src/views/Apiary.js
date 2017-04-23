@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import Slider from 'material-ui/Slider';
 import menuTitleStore from '../MenuTitleStore';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
 import Button from '../components/Button';
 import CustomSlider from '../components/Slider';
@@ -20,22 +18,16 @@ const valueWrapper = {
   display: 'flex',
   justifyContent: 'space-between',
   marginTop: 20 + 'px',
-  marginBottom: 40 + 'px'
+  marginBottom: 40 + 'px',
 }
 
 const totalPriceWrapper = {
   textAlign: 'center',
   color: "#ebebeb",
   fontSize: 14 + 'px',
-  marginBottom: 40 + 'px'
-}
-
-const currentValue = {
-  fontWeight: 'bold'
-}
-
-var roundToTwo = (num) => {    
-    return +(Math.round(num + "e+2")  + "e-2");
+  marginBottom: 40 + 'px',
+  animationDuration: 0.5 + 's',
+  animationDelay: 0.5 + 's'
 }
 
 const beehiveChargesPerSize = [
@@ -57,13 +49,20 @@ export default class Apiary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sliderValue: 2
+      sliderValue: 2,
+      doAnimate: 0
     }
   }
 
   componentWillMount() {
     menuTitleStore.title = "Establish a beehive";
     menuTitleStore.progressSelected = 3;
+  }
+
+  componentDidMount() {
+    this.setState({
+      doAnimate: 1
+    });
   }
 
   handleSliderChange = (e, v) => {
@@ -77,22 +76,30 @@ export default class Apiary extends Component {
       <div style={viewWrapper}>
         <div style={{width: 75 + '%', margin: '0 auto'}}>
           <div style={{width: 100 + '%', textAlign: 'center'}}>
-            <img style={{margin: "auto", padding: "40px 0", width: "65%"}} src={'/img/beehive.svg'} />
+            <VelocityTransitionGroup enter={{animation: "transition.flipXIn", duration: 1000}} leave={{animation: "slideUp"}} runOnMount={true}>
+              <img style={{margin: "auto", padding: "40px 0", width: "65%"}} src={'/img/beehive.svg'} alt="beehive"/>
+            </VelocityTransitionGroup>
           </div>
-          <div style={{padding: "0 20px"}}>
-            <CustomSlider min={1} max={3} step={1} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
+
+          <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.25 + 's'}} className="animated fadeInDown">
+            <div style={{padding: "0 20px"}}>
+              <CustomSlider min={1} max={3} step={1} defaultValue={this.state.sliderValue} onSliderChange={this.handleSliderChange}/>
+            </div>
+            <div style={valueWrapper}>
+              <div className={this.state.sliderValue === 1 ? 'current' : ''}>Small</div>
+              <div className={this.state.sliderValue === 2 ? 'current' : ''}>Medium</div>
+              <div className={this.state.sliderValue === 3 ? 'current' : ''}>Large</div>
+            </div>
           </div>
-          <div style={valueWrapper}>
-            <div className={this.state.sliderValue == 1 ? 'current' : ''}>Small</div>
-            <div className={this.state.sliderValue == 2 ? 'current' : ''}>Medium</div>
-            <div className={this.state.sliderValue == 3 ? 'current' : ''}>Large</div>
-          </div>
-          <div style={totalPriceWrapper}>
+
+          <div style={totalPriceWrapper} className="animated fadeInDown">
             <p style={{ borderTop: "1px solid #979797", borderBottom: "1px solid #979797", padding: "10px 0"}}>
               {beehiveChargesPerSize[this.state.sliderValue - 1]['quantity'] + "L of honey for $" + beehiveChargesPerSize[this.state.sliderValue - 1]['amount'] + "/month"}
             </p>
           </div>
-          <Button title="Confirm" style={{margin: 'auto'}}/>
+          <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.75 + 's'}} className="animated fadeInDown">
+            <Button title="Confirm" style={{margin: 'auto'}} />
+          </div>
         </div>
 
       </div>
