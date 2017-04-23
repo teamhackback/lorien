@@ -80,24 +80,28 @@ export default class ExtraServices extends Component {
       nrSelected: 0,
       items: [
         {
+          index: 0,
           img: "/img/extraservices/drone.png",
           title: "The drone gardener",
           subtitle: "Makes your mother happy",
           cost: 200
         },
         {
+          index: 1,
           img: "/img/extraservices/beehive.png",
           title: "Apiary",
           subtitle: "Gives you honey",
           cost: 15
         },
         {
+          index: 2,
           img: "/img/extraservices/satellite.png",
           title: "Satellite observation",
           subtitle: "Continuous monitoring from the sky",
           cost: 200
         },
         {
+          index: 3,
           img: "/img/extraservices/tree.png",
           title: "Premium support",
           subtitle: "More care, more checkins",
@@ -105,6 +109,13 @@ export default class ExtraServices extends Component {
         }
       ]
     };
+    if (cart.premiumServices.length > 0) {
+      cart.premiumServices.forEach(service => {
+        this.state.items[service.index].selected = true;
+      });
+      this.state.nrSelected = cart.premiumServices.length;
+    }
+    //}}
   }
 
   onTap(item, i, e) {
