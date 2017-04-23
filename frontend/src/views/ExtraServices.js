@@ -6,20 +6,29 @@ import Slider from 'react-slick';
 import Tappable from 'react-tappable';
 
 function CarouselItem(props) {
+	const defaultBorder = "solid 1px #979797";
+	const greenBorder = "solid 5px #bed625";
   return (
     <div className="carousel-item" style={{
-      borderRadius: 3,
-      boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
-      border: "solid 1px #979797"
+      borderRadius: props.selected ? 0 : 3,
+			boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
+      border: props.selected ? "solid 1px #bed625" : defaultBorder,
+      outline: props.selected ? "solid 5px #bed625" : "none",
+      borderBottom: props.selected ? greenBorder : defaultBorder,
+      borderTop: props.selected ? greenBorder : defaultBorder,
+			marginTop: props.selected ? 0 : 4,
+			marginBottom: props.selected ? 0 : 5
     }}>
-    <img src={props.img} alt="carousel" style={{
-      maxWidth: "100%",
-      maxHeight: "100%",
+    <div  alt="carousel" style={{
+			height: "220px",
+			width: "100%",
+			backgroundImage: `url(${props.img})`,
+			backgroundSize: "cover",
+			backgroundPosition: "50% 50%"
     }}/>
       <div style={{
-        borderRadius: 3,
-        backgroundColor: props.selected ? "red" : "#d8d8d8",
-        boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
+        backgroundColor: "#d8d8d8",
+        boxShadow: props.selected ? "none" : "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
         border: "solid 1px #979797",
         color: "black",
         paddingLeft: 25,
@@ -58,23 +67,30 @@ export default class ExtraServices extends Component {
     menuTitleStore.title = "Extra services";
     menuTitleStore.progressSelected = 2;
     this.state = {
+      nrSelected: 0,
       items: [
         {
-          img: "/dummy/carousel.jpg",
+          img: "/img/extraservices/drone.png",
           title: "The drone gardener",
           subtitle: "Makes your mother happy",
           cost: "+200$ / month"
         },
         {
-          img: "/dummy/carousel.jpg",
-          title: "The drone gardener",
-          subtitle: "Makes your mother happy",
+          img: "/img/extraservices/beehive.png",
+          title: "Apiary",
+          subtitle: "Gives you honey",
+          cost: "+15$ / month"
+        },
+        {
+          img: "/img/extraservices/satellite.png",
+          title: "Satellite observation",
+          subtitle: "Continuous monitoring from the sky",
           cost: "+200$ / month"
         },
         {
-          img: "/dummy/carousel.jpg",
-          title: "The drone gardener",
-          subtitle: "Makes your mother happy",
+          img: "/img/extraservices/tree.png",
+          title: "Premium support",
+          subtitle: "More care, more checkins",
           cost: "+200$ / month"
         }
       ]
@@ -84,7 +100,10 @@ export default class ExtraServices extends Component {
   onTap(item, i, e) {
       const items = this.state.items;
       items[i].selected = !items[i].selected;
-      this.setState({items});
+      this.setState({
+        items,
+        nrSelected : items[i].selected ? this.state.nrSelected + 1 : this.state.nrSelected - 1
+      });
   }
 
   render() {
@@ -94,14 +113,19 @@ export default class ExtraServices extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      initialSlide: 1,
+      initialSlide: 0,
       centerMode: true,
       centerPadding: '60px',
       className: 'carousel'
     };
 
     return (
-      <div>
+      <div style={{
+        minHeight: window.innerHeight - 40,
+        backgroundImage: "url('/img/extraservices/background.jpg')",
+        backgroundSize: "cover",
+        paddingTop: "12%"
+      }}>
         <Slider {...settings}>
           {this.state.items.map((item, i) =>
             <div key={i}>
@@ -111,9 +135,20 @@ export default class ExtraServices extends Component {
             </div>
           )}
         </Slider>
+        <div style={{
+          textAlign: "center",
+          opacity: 0.5,
+          fontSize: 14,
+          fontWeight: 300,
+          marginTop: "10%",
+          marginBottom: "10%",
+          color: "white"
+        }}>
+          {this.state.nrSelected} items selected
+        </div>
         <Link to="/order/checkout">
           <Button
-            title="Skip"
+            title={this.state.nrSelected > 0 ? "Continue" : "Skip for now"}
             style={{
             width: 250,
             left: "50%",
