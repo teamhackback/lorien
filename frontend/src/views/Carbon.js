@@ -5,6 +5,7 @@ import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 import Button from '../components/Button';
 import CustomSlider from '../components/Slider';
 import cartItems from '../CartItems';
+import {findDOMNode} from 'react-dom';
 
 const viewWrapper = {
   height: 100 + "vh",
@@ -95,10 +96,15 @@ export default class Carbon extends Component {
 
   handleConfirm = (e) => {
     e.preventDefault();
-    cartItems.carbon.nrOfTrees = this.state.numTrees;
+    cartItems.carbon.nrOfTrees = this.state.numTrees
     cartItems.carbon.co2 = inHumanUnits(this.state.sliderValue);
     console.log(cartItems);
-    this.context.router.history.push("/order/location");
+
+    const node = findDOMNode(this);
+    node.className = "fadeOutEffect";
+    setTimeout(() => {
+      this.context.router.history.push("/order/location");
+    }, 300);
   }
 
   render() {

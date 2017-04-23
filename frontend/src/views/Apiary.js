@@ -5,6 +5,7 @@ import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 import Button from '../components/Button';
 import CustomSlider from '../components/Slider';
 import cartItems from '../CartItems';
+import {findDOMNode} from 'react-dom';
 
 const viewWrapper = {
   height: 100 + "vh",
@@ -81,8 +82,12 @@ export default class Apiary extends Component {
     e.preventDefault();
     cartItems.beehive.size = itemInformation[this.state.sliderValue - 1]['name']
     cartItems.beehive.value = this.state.sliderValue
-    console.log(cartItems);
-    this.context.router.history.push("/order/location");
+
+    const node = findDOMNode(this);
+    node.className = "fadeOutEffect";
+    setTimeout(() => {
+      this.context.router.history.push("/order/location");
+    }, 300);
   }
 
   render() {
