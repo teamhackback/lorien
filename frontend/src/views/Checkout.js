@@ -58,12 +58,12 @@ export default class Checkout extends Component {
         mainCost = 5;
         break;
       case "beehive":
-        mainImg = `/img/beehive.svg`;
-        mainText = `You are going to plant a ${cart.behive.size} beehive in ${location}`;
+        mainImg = `/img/apiary${cart.beehive.value}.svg`;
+        mainText = `You are going to plant a ${cart.beehive.size} beehive in ${location}`;
         mainCost = 10;
         break;
       case "carbon":
-        mainImg = `/img/carbon.svg`;
+        mainImg = `/img/carbon.png`;
         mainText = `You are going to adapt ${cart.carbon.nrOfTrees} trees in ${location}`;
         mainCost = 15;
         break;

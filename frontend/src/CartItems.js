@@ -11,9 +11,10 @@ class Cart {
       this.serialize();
     }, 500);
   }
-  globalCategory = "tree"; // null, "beehive", "tree", "carbon"
+  globalCategory = "carbon"; // null, "beehive", "tree", "carbon"
   beehive = {
-    size: "small"
+    size: "small",
+    value: 1
   };
   tree = {
     selectedType: "pine"
