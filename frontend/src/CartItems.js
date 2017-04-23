@@ -43,7 +43,7 @@ class Cart {
     localStorage.setItem(`cart.locations`, JSON.stringify(locations));
   }
 
-  clear = () {
+  clear = () => {
     this.keys.forEach(key => {
       localStorage.removeItem(`cart.${key}`);
     });

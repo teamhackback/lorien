@@ -80,6 +80,12 @@ export default class Checkout extends Component {
       loading = true;
       const orderId = window.location.pathname.split("/").slice(-1)[0];
       console.log("orderId", orderId);
+
+      fetch('https://lorien.hackback.tech/api/offer/foo', {
+      	method: 'get'
+      }).then((response) => {
+        this.loadThankYou(response);
+      });
     }
     this.state = {
       mainImg,
@@ -90,11 +96,11 @@ export default class Checkout extends Component {
       loading
     }
   }
-  loadThankYou() {
+  loadThankYou(response) {
+    console.log(response);
     let mainImg, mainText, mainCost, totalCost;
     const loading = false;
     mainText = "We received your order for ";
-    const response = {};
     switch(response.globalCategory) {
       case "tree":
         mainImg = `/img/trees/${response.tree.selectedType.toLowerCase()}.svg`;
