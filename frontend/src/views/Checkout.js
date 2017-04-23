@@ -81,8 +81,10 @@ export default class Checkout extends Component {
       const orderId = window.location.pathname.split("/").slice(-1)[0];
       console.log("orderId", orderId);
 
-      fetch('https://lorien.hackback.tech/api/offer/foo', {
+      fetch('https://lorien.hackback.tech/api/order/' + orderId, {
       	method: 'get'
+      }).then((response) => {
+        return response.json();
       }).then((response) => {
         this.loadThankYou(response);
       });
@@ -100,6 +102,8 @@ export default class Checkout extends Component {
     console.log(response);
     let mainImg, mainText, mainCost, totalCost;
     const loading = false;
+    const selectedLocations = response.locations.filter(e => e.selected);
+    const location = selectedLocations.length > 0 && selectedLocations[0].title;
     mainText = "We received your order for ";
     switch(response.globalCategory) {
       case "tree":
@@ -119,7 +123,13 @@ export default class Checkout extends Component {
         break;
     }
     totalCost = mainCost + response.premiumServices.map(e => e.cost).reduce((a, b) => a + b, 0);
-
+    this.setState({
+      mainImg,
+      mainText,
+      mainCost,
+      totalCost,
+      loading
+    });
   }
   componentWillMount() {
     menuTitleStore.title = "Checkout";
@@ -203,7 +213,7 @@ export default class Checkout extends Component {
                 paddingBottom: 20,
                 textAlign: "center",
               }}>
-                This will cost you:  {this.state.mainCost} $ / month
+                { this.state.afterPayPal ? "Total cost:" : "This will cost you:"}  {this.state.mainCost} $ / month
               </div>
 
               { cart.premiumServices.length > 0 ?
