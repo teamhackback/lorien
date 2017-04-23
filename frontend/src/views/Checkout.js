@@ -120,6 +120,14 @@ export default class Checkout extends Component {
     menuTitleStore.progressSelected = 3;
   }
 
+  handleClick = (e) => {
+    console.log('sending:' + JSON.stringify(cart))
+    fetch('http://localhost:8001/api/order', {
+      method: 'post',
+      body: JSON.stringify(cart)
+    });
+  }
+
   render() {
     return (
       <div style={viewWrapper}>
@@ -210,7 +218,7 @@ export default class Checkout extends Component {
                 </div>
 
                 <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.5 + 's'}} className="animated fadeInDown">
-                    <div style={{textAlign: 'center'}} >
+                    <div style={{textAlign: 'center'}} onClick={this.handleClick}>
                       <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
                     </div>
                 </div>
