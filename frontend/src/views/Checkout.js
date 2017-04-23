@@ -113,12 +113,12 @@ export default class Checkout extends Component {
         break;
       case "beehive":
         mainImg = `/img/apiary${response.beehive.value}.svg`;
-        mainText = `planting ${response.beehive.size.toLowerCase()} beehive in ${location}`;
+        mainText + `planting ${response.beehive.size.toLowerCase()} beehive in ${location}`;
         mainCost = 100 * response.beehive.value;
         break;
       case "carbon":
         mainImg = `/img/carbon.png`;
-        mainText = `adaption of ${response.carbon.nrOfTrees} trees in ${location} to compensate for ${response.carbon.co2} of carbon footprint`;
+        mainText += `adaption of ${response.carbon.nrOfTrees} trees in ${location} to compensate for ${response.carbon.co2} of carbon footprint`;
         mainCost = 10 * response.carbon.nrOfTrees;
         break;
     }
