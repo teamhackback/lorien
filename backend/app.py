@@ -1,7 +1,8 @@
 import pymongo
 import json
+import paypalrestsdk
 from os import environ
-from flask import Flask, request, abort
+from flask import Flask, request, abort, redirect
 from werkzeug import Response
 from db import orders
 from bson.json_util import dumps
@@ -35,12 +36,47 @@ def get_order(order_id):
             )
 
 
-@app.route('/api/order', methods=['POST'])
+@app.route('/api/order')
 def put_order():
-    order = request.get_json()
-    orders.insert_one(order)
+    # order = request.get_json()
+    # orders.insert_one(order)
 
-    return ('', 204)
+    payment = paypalrestsdk.Payment({
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:3000/order/thankyou",
+            "cancel_url": "http://localhost:3000/order/error"
+        },
+        "transactions": [
+            {
+                "item_list": {"items": [
+                        {
+                            "name": "Kiwi Tree",
+                            "sku": "Kiwi Tree",
+                            "price": "13.00",
+                            "currency": "EUR",
+                            "quantity": 1
+                        }
+                ]},
+                "amount": {
+                    "total": "13.00",
+                    "currency": "EUR"
+                },
+                "description": "Kiwi tree in location X."
+            }]
+    })
+
+    if payment.create():
+        print("Payment[%s] created successfully" % (payment.id))
+        for link in payment.links:
+            if link.method == "REDIRECT":
+                return redirect(str(link.href))
+    else:
+        print("Error while creating payment")
+        print(payment.error)
 
 
 if __name__ == '__main__':

@@ -4,6 +4,7 @@ import {VelocityComponent, VelocityTransitionGroup} from 'velocity-react';
 
 import Button from '../components/Button';
 import CustomSlider from '../components/Slider';
+import cartItems from '../CartItems';
 
 const viewWrapper = {
   height: 100 + "vh",
@@ -30,18 +31,21 @@ const totalPriceWrapper = {
   animationDelay: 0.5 + 's'
 }
 
-const beehiveChargesPerSize = [
+const itemInformation = [
   {
-    'quantity': 1,
-    'amount': 10
+    'name': 'Small Beehive',
+    'liters': 1,
+    'price': 10
   }, 
   {
-    'quantity': 2,
-    'amount': 20
+    'name': 'Medium Beehive',
+    'liters': 2,
+    'price': 20
   },
   {
-    'quantity': 4,
-    'amount': 30
+    'name': 'Large Beehive',
+    'liters': 4,
+    'price': 30
   },
 ];
 
@@ -71,6 +75,20 @@ export default class Apiary extends Component {
     });
   }
 
+  handleConfirm = (e) => {
+    e.preventDefault();
+
+    let item = {
+      name: itemInformation[this.state.sliderValue - 1]['name'],
+      sku: itemInformation[this.state.sliderValue - 1]['name'],
+      price: itemInformation[this.state.sliderValue - 1]['price'],
+      currency: 'EUR',
+      quantity: 1
+    }
+
+    cartItems.beehives.push(item)
+  }
+
   render() {
     return (
       <div style={viewWrapper}>
@@ -94,11 +112,11 @@ export default class Apiary extends Component {
 
           <div style={totalPriceWrapper} className="animated fadeInDown">
             <p style={{ borderTop: "1px solid #979797", borderBottom: "1px solid #979797", padding: "10px 0"}}>
-              {beehiveChargesPerSize[this.state.sliderValue - 1]['quantity'] + "L of honey for $" + beehiveChargesPerSize[this.state.sliderValue - 1]['amount'] + "/month"}
+              {itemInformation[this.state.sliderValue - 1]['liters'] + "L of honey for €" + itemInformation[this.state.sliderValue - 1]['price'] + "/month"}
             </p>
           </div>
           <div style={{ animationDuration: 0.5 + 's', animationDelay: 0.75 + 's'}} className="animated fadeInDown">
-            <Button title="Confirm" style={{margin: 'auto'}} />
+            <Button title="Confirm" style={{margin: 'auto'}} onClick={this.handleConfirm}/>
           </div>
         </div>
 

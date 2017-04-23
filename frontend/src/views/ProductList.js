@@ -114,7 +114,7 @@ const menuItems = [
 },
 {
   id: 3,
-  title: "Reduce your CO2 footprint",
+  title: "Reduce your CO₂ footprint",
   subtitle: "Sponsor a tree to protect it from chopping",
   img: "/img/menu-icons/berry.svg",
   style: {
