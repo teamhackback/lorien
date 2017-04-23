@@ -9,7 +9,9 @@ function CarouselItem(props) {
 	const defaultBorder = "solid 1px #979797";
 	const greenBorder = "solid 5px #bed625";
   return (
-    <div className="carousel-item" style={{
+    <div className="carousel-item animated zoomIn" style={{
+		  animationDuration: "700ms",
+		  animationDelay: "300ms",
       borderRadius: props.selected ? 0 : 3,
 			boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
       border: props.selected ? "solid 1px #bed625" : defaultBorder,
@@ -49,12 +51,17 @@ function CarouselItem(props) {
           fontSize: 14,
           fontWeight: 300,
           lineHeight: 1.57,
+					height: 55,
+  			  display: "flex",
+    		  alignItems: "center",
         }}>
-          <div>
-            {props.subtitle}
-          </div>
-          <div>
-            Cost: {props.cost}
+						<div>
+          	<div>
+          	  {props.subtitle}
+          	</div>
+          	<div>
+          	  Cost: {props.cost}
+          	</div>
           </div>
         </div>
       </div>
@@ -135,7 +142,11 @@ export default class ExtraServices extends Component {
             </div>
           )}
         </Slider>
-        <div style={{
+        <div
+				className="animated zoomIn"
+				style={{
+					animationDuration: "700ms",
+					animationDelay: "300ms",
           textAlign: "center",
           opacity: 0.5,
           fontSize: 14,
@@ -146,17 +157,18 @@ export default class ExtraServices extends Component {
         }}>
           {this.state.nrSelected} items selected
         </div>
-        <Link to="/order/checkout">
-          <Button
-            title={this.state.nrSelected > 0 ? "Continue" : "Skip for now"}
-            style={{
-            width: 250,
-            left: "50%",
-            transform: "translate(-50%, 0)",
-            position: "relative",
-          }}>
-          </Button>
-        </Link>
+        	<Link to="/order/checkout">
+        	  <Button
+							className="animated slideInUp"
+        	    title={this.state.nrSelected > 0 ? "Continue" : "Skip for now"}
+        	    style={{
+							animationDuration: "700ms",
+							animationDelay: "300ms",
+              width: 250,
+              margin: "0 auto"
+        	  }}>
+        	  </Button>
+        	</Link>
       </div>
     )
   }
