@@ -80,7 +80,8 @@ const Map = withGoogleMap(props => {
       streetViewControl: false,
       zoomControl: false,
       mapTypeControl: false,
-      mapTypeId: google.maps.MapTypeId.HYBRID
+      mapTypeId: google.maps.MapTypeId.HYBRID,
+      gestureHandling: "greedy"
     }}
   >
     <SearchBox
@@ -114,11 +115,12 @@ export default Dimensions()(class LocationPicker extends Component {
   state = {
     bounds: null,
     center: {
-      lat: 65.318541,
+      lat: 64.818541,
       lng: 26.715859
     },
     markers: locations,
-		hasSelectedMarker: locations.filter(e => e.selected).length > 0
+		hasSelectedMarker: locations.filter(e => e.selected).length > 0,
+    totalHeight: window.innerHeight
   }
   componentWillMount() {
     menuTitleStore.title = "Where should we put it?";
@@ -251,17 +253,17 @@ export default Dimensions()(class LocationPicker extends Component {
 	}
 
   render() {
-    console.log("foo", window.innerHeight);
-    const totalHeight = window.innerHeight - 46;
     return (
       <div>
         <div style={{
           width: this.props.containerWidth,
-          height: totalHeight,
+          height: this.state.totalHeight,
+          position: "absolute",
+          top: 46,
         }}>
           <Map
             containerElement={
-              <div style={{ height: totalHeight }} />
+              <div style={{ height: this.state.totalHeight }} />
             }
             mapElement={
               <div style={{ height: `100%` }} />
@@ -280,9 +282,9 @@ export default Dimensions()(class LocationPicker extends Component {
           />
         </div>
         <div style={{
-          position: "fixed",
+          position: "absolute",
           margin: "0 auto",
-          marginTop: -80,
+          marginTop: this.state.totalHeight - 105,
           zIndex: 10,
           width: window.innerWidth,
         }}>
