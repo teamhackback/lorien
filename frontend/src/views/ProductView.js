@@ -26,10 +26,10 @@ class ResponsiveTile extends Component {
         img: {
           duration: 500,
           style: {
-            maxWidth: 1000,
-            maxHeight: 1000,
-            width: window.innerWidth * 0.8,
-            height: window.innerWidth * 0.8,
+            //maxWidth: 1000,
+            //maxHeight: 1000,
+            width: window.innerWidth * 0.1,
+            height: window.innerWidth * 0.1,
             marginTop: "20%"
           }
         }
