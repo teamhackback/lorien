@@ -5,7 +5,7 @@ class Cart {
     this.keys = Object.keys(this).filter(key => {
       return typeof this[key] !== "function";
     });
-    this.load();
+    //this.load();
     console.log(this);
     this.interval = setInterval(this.serialize(), 500);
   }
@@ -45,6 +45,9 @@ class Cart {
     clearInterval(this.interval);
     this.keys.forEach(key => {
       localStorage.removeItem(`cart.${key}`);
+    });
+    locations.forEach(marker => {
+      marker.selected = false;
     });
   }
 }
